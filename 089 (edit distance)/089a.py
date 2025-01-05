@@ -3,29 +3,20 @@
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         pass
-        # two pointers, `idx` for iterating backwards through `word1`
-        # and `tagIdx` for `word2`'s index starting from behind
+        # since the words can be of different sizes
+        # if they're equal lengths, we'd possibly replace in `word1`
+        # if `word1` is longer, we'd remove and/or replace from `word1`
+        # if `word2` is longer, we'd add and/or replace to `word1`
         
-        # a variable, `count`, that represents the "changes" made to `word1`
+        # LIS is longest common substring??
         
-        count = 0
-        tagIdx = len(word2) - 1
-        # iterate backwards through `word1`
-        for idx in range(len(word1)-1, -1, -1):
-            # compare each char with `word2[tagIdx]`
-            # if they are equal, `tagIdx -= 1`
-            # if they are unqueal and `idx == tagIdx`
-            # `tagIdx -= 1`
+        # find LIS between the two strings
+        # using the position of the LIS in `word2`
 
-            char = word1[idx]
-            if char != word2[tagIdx]:
-                count += 1
-                
-            if char == word2[tagIdx] or idx == tagIdx:
-                tagIdx -= 1
-                
-                
-        return count if len(word1) >= len(word2) else count + len(word2) - len(word1)
+        # count += max(
+        #   determine the number of characters before the LIS in `word2`,
+        #   determine the number of characters before the LIS in `word1`
+        # )
 
 arr = [
     ["horse", "ros"],

@@ -1,5 +1,5 @@
 main:
-longest increasing subsequence
+burst balloons
 
 SQ
 maximum swap

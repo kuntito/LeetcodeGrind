@@ -4,47 +4,49 @@ class Solution:
     def largestRectangleArea(self, heights: list[int]) -> int:
         pass
         
-        # TODO critique the rationale for the stacks
-        # each idx in heights wants to know if there are any smaller indexes to it's left and to it's right
+        # TODO at each idx, you want to know how far it can travel left before hitting an index with a lower height and how far it can travel right before hitting an index with a lower height
         
-        
-        
-
-    def get_left(self, heights):
-        dim = len(heights)
-        left = [None] * dim
-        
-        smallest = (heights[0], 0)
-        for idx in range(dim):
-            if idx == 0:
-                continue
-
-            left[idx] = smallest
+        res = 0
+        seen = set()
+        for idx, h in enumerate(heights):
+            # TODO right direction but this is the wrong condition
+            if h == 0:
+                seen = set()
             
-            val = heights[idx]
-            if val <= smallest[0]:
-                smallest = (val, idx)
-
-        return left
-
-
-    def get_right(self, heights):
-        dim = len(heights)
-        right = [None] * dim
-        smallest = (heights[dim-1], dim-1)
-        for idx in range(dim-1, -1, -1):
-            if idx == dim - 1:
-                continue
+            if h in seen: continue
+            seen.add(h)
             
-            val = heights[idx]
-            right[idx] = smallest
-            if val <= smallest[0]:
-                smallest = (val, idx)
-
-        return right
+            left_idx = self.get_left(idx, heights)
+            right_idx = self.get_right(idx, heights)
+            
+            currArea = (right_idx - left_idx + 1) * h
+            res = max(res, currArea)
+            
+        return res
+    
+    def get_left(self, idx, heights):
+        targetHeight = heights[idx]
+        
+        while idx - 1 > -1 and heights[idx - 1] >= targetHeight:
+            idx -= 1
+            
+        return idx
+    
+    def get_right(self, idx, heights):
+        targetHeight = heights[idx]
+        
+        while idx + 1 < len(heights) and heights[idx + 1] >= targetHeight:
+            idx += 1
+        
+        return idx
+        
+            
         
 arr = [
     [2,1,5,6,2,3],
+    [2, 4],
+    [2,1,2],
+    [4,7,5,1,8,9,4,4,1,3,5,3,7,9,9,1,4],
 ]
 foo = arr[-1]
 sol = Solution()
