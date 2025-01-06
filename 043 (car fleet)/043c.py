@@ -17,6 +17,7 @@ class Solution:
             # pair each position with it's speed
             intervals = self.get_intervals(position, speed)
             intervals.sort()
+            print(intervals)
             
             # if i == 1:
             #     print(intervals)

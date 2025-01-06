@@ -1,24 +1,11 @@
-class Solution:
-    def wateringPlants(self, plants: list[int], capacity: int) -> int:
-        curr_capacity = capacity
-        steps = 0
+a = [[1,15,6,8,18,14,16,2,19,17,3,20,5], [8,5,5,7,10,10,7,9,3,4,4,10,2]]
 
-        for idx, water_need in enumerate(plants):
-            pass
-            curr_capacity -= water_need
-
-            next_idx = idx + 1
-            if next_idx < len(plants) and curr_capacity < plants[next_idx]:
-                curr_capacity = capacity
-                steps_to_go_back = (idx + 1) * 2
-                steps += steps_to_go_back
-
-            steps += 1
-
-        return steps
+res = []
+for one, two in zip(a[0], a[1]):
+    res.append((one, two))
     
+res.sort()
 
-plants, capacity = [5,2,4,2,7,4,3,3,1,1], 10
-sol = Solution()
-res = sol.wateringPlants(plants, capacity)
-print(res)
+
+for pos, sp in res:
+    print(sp)
