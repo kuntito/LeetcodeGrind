@@ -11,6 +11,7 @@ class Solution:
         res = 0
         prevEnd = intervals[0][1]
         for start, end in intervals[1:]:
+            # if the current interval does not overlap with the previous interval
             if start >= prevEnd:
                 prevEnd = end
             else:
