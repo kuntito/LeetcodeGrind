@@ -1,5 +1,5 @@
 main:
-minimum window substring
+valid parentheses string
 
 SQ
 maximum swap

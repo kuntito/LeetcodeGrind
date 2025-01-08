@@ -1,7 +1,6 @@
 # https://leetcode.com/problems/cheapest-flights-within-k-stops/description/
 
-# TODO make this work
-# skip visited nodes if needed
+# TODO why does this cause a memory error?
 class Solution:
     def findCheapestPrice(self, n: int, flights: list[list[int]], src: int, dst: int, k: int) -> int:
         pass
@@ -16,18 +15,20 @@ class Solution:
         
         
         # create a hashmap for each node
+        # hashmap = {node: shortest_distance_to_node}
+        # initialize the shortest distance for each node to `float("inf")`
         hashmap = {}
         for i in range(n):
             hashmap[i] = float("inf")
-        # hashmap = {node: shortest_distance_to_node}
-        # initialize the shortest distance for each node to `float("inf")`
+
         # set hashmap[0] = 0
         hashmap[src] = 0
         
         count = k + 1
         while visited and count:
             next_set = []
-            newHash = {}
+            newHash = hashmap.copy()
+            
             while visited:
                 currNode = visited.pop()
                 for nei, neiPrice in adj_list[currNode]:
@@ -35,10 +36,11 @@ class Solution:
                     
                     currPrice = hashmap[currNode] + neiPrice
                     # FIXME i'm updating the hashmap with the newest values before visiting all the pending nodes
-                    if currPrice < hashmap[nei]:
-                        hashmap[nei] = currPrice
-            print(next_set)
+                    if currPrice < newHash[nei]:
+                        newHash[nei] = currPrice
+            # print(next_set)
             visited = next_set
+            hashmap = newHash
             count -= 1
             
         return -1 if hashmap[dst] == float("inf") else hashmap[dst]
