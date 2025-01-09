@@ -38,19 +38,28 @@ class Solution:
         return ''.join(str(ch) for ch in slots[idx:])
             
             
-    def place(self, mult, idx, slots):
-        while mult:    
-            dig = mult % 10
+    # def place(self, mult, idx, slots):
+    #     while mult:    
+    #         dig = mult % 10
             
-            new_val = slots[idx] + dig
-            quo, rem = divmod(new_val, 10)
-            slots[idx] = rem
+    #         new_val = slots[idx] + dig
+    #         quo, rem = divmod(new_val, 10)
+    #         slots[idx] = rem
             
-            if quo:
-                self.place(quo, idx-1, slots)
+    #         if quo:
+    #             self.place(quo, idx-1, slots)
                 
-            mult //= 10
-            idx -= 1
+    #         mult //= 10
+    #         idx -= 1
+
+    def place(self, mult, idx, slots):
+        pass
+        slots[idx] += mult
+        
+        quo, rem = divmod(slots[idx], 10)
+        
+        slots[idx] = rem
+        slots[idx - 1] += quo
 
             
         

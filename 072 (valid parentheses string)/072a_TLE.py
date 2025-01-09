@@ -18,15 +18,6 @@ class Solution:
 
         # the memo key should be what the previous slots contained + the new type
         memo = {}
-        # return any((
-        #     self.explore('(', 0, slots, arr, "", memo),
-        #     self.explore('', 0, slots, arr, "", memo),
-        #     self.explore(')', 0, slots, arr, "", memo)
-        # ))
-        
-        # TODO what's the difference between these two renditions, `any` and returning each check `a, b, c`
-        # why does one cause TLE for the testcase `arr[-1]`
-        
         
         a = self.explore('(', 0, slots, arr, "", memo)
         if a:

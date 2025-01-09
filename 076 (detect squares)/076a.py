@@ -1,6 +1,5 @@
 # https://leetcode.com/problems/detect-squares/description/
 
-# TODO https://neetcode.io/solutions/detect-squares
 class DetectSquares:
     def __init__(self):
         pass
@@ -49,7 +48,6 @@ class DetectSquares:
         #   can they form a square?
         #       if yes, how many?
         for pos in points_on_y_axis:
-            # TODO address this
             if pos == point: continue
             
             x_pos, y_pos = pos
