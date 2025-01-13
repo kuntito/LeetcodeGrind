@@ -1,14 +1,14 @@
 # https://leetcode.com/problems/longest-increasing-subsequence/description/
 
 # TODO https://neetcode.io/solutions/longest-increasing-subsequence
-# TODO this has TLE, compare with `087c.py`
 class Solution:
     def lengthOfLIS(self, nums: list[int]) -> int:
         res = 0
+        memo = {}
         for idx in range(len(nums)-1, -1, -1):
             res = max(
                 res,
-                self.explore(idx, nums, {})
+                self.explore(idx, nums, memo)
             )
         return res
     

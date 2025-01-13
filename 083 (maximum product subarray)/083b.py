@@ -4,40 +4,35 @@
 # write deep's solution 15:08
 class Solution:
     def maxProduct(self, nums: list[int]) -> int:
-        max_res, min_res = 0, 0
+        res = max(nums)
+        curMin, curMax = 1, 1
         
         for n in nums:
             if n == 0:
-                max_res, min_res = 0, 0
+                curMin, curMax = 1, 1
                 continue
-                
-            if max_res == 0:
-                max_res = n
-            else:
-                one = n * max_res
             
-            if min_res == 0:
-                min_res = n
-            else:
-                two = n * min_res
+            tmpMax = curMax * n
+            tmpMin = curMin * n
             
-            max_res = max(max_res, one)
-            min_res = min(min_res, two)
+            curMax = max(tmpMax, tmpMin, n)
+            curMin = min(tmpMax, tmpMin, n)
+            res = max(res, curMax)
             
-        return max_res
+        return res
         
         
     
 
 arr = [
-    [-2,0,-1],
+    # [-2,0,-1],
+    # [2,3,-2,10, -2],
+    # [-3,-1,-1],
+    # [-2, -3, -5],
+    # [-2, 10],
+    # [0,-3,1,1],
+    # [5, 0, 5],
     [-2, -3, -4],
-    [2,3,-2,10, -2],
-    [-3,-1,-1],
-    [-2, -3, -5],
-    [-2, 10],
-    [0,-3,1,1],
-    [5, 0, 5],
 ]
 
 foo = arr[-1]

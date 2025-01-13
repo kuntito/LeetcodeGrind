@@ -1,5 +1,5 @@
 main:
-maximum product subarray
+burst balloons
 
 SQ
 maximum swap

@@ -5,46 +5,45 @@ class Solution:
     def maximalSquare(self, matrix: list[list[str]]) -> int:
         pass
         # iterate through the grid for every position with `1`
-        # explore it with bfs
-        # for each position, get all it's neighbours (right, downRight and down)
-        # use a set to keep it unique
-        # if the values of it's neighbours are all `1`
-        # increment the square count
-    
+        # using bfs, explore the right, downRight and down neighbours
+        # if they are all 1's increase the level of the square
+        
         res = 0
         for ri, row in enumerate(matrix):
             for ci, val in enumerate(row):
                 if val == '1':
-                    res = max(res, self.explore(ri, ci, matrix))
-
+                    count = self.explore_square(ri, ci, matrix)
+                    res = max(res, count)
                     
         return res ** 2
     
-    
-    def explore(self, ri, ci, matrix):
+    def explore_square(self, start_ri, start_ci, matrix):
         pass
-        count = 1
+        pos = (start_ri, start_ci)
+        level = 1
+        seen = set()
     
-        pos = (ri, ci)
         arr = [pos]
+        seen.add(pos)
         
         while arr:
-            seen = set()
+            tmp = []
             while arr:
-                foo = arr.pop()
-                neis = self.get_neighbours(foo, matrix)
-                if len(neis) != 3:
-                    return count
-                for n in neis:
-                    seen.add(n)
+                # coordinates of a valid position
+                currPos = arr.pop()
+                foo = self.explore_valid_neighbours(currPos, matrix, seen)
+                if not foo:
+                    return level
+                
+                tmp.extend(foo)
+                    
+            arr = tmp
+            level += 1
             
-            arr = list(seen)
-            count += 1
-            
-        return count
+        return level
     
-    
-    def get_neighbours(self, pos, matrix):
+    # TODO only add neighbours that have not been seen
+    def explore_valid_neighbours(self, pos, matrix, seen):
         ri, ci = pos
         rows, cols = len(matrix), len(matrix[0])
         
@@ -53,8 +52,19 @@ class Solution:
             (ri + 1, ci + 1),
             (ri + 1, ci),
         ]
-        
-        return [(r, c) for r, c in neis if r >= 0 and r < rows and c >= 0 and c < cols and matrix[r][c] == '1']
+
+        for ni in neis:
+            r, c = ni
+            if r < 0 or r == rows or c < 0 or c == cols or matrix[r][c] == '0':
+                return
+            if ni in seen:
+                pass
+            
+        return neis
+                    
+                
+    
+    
     
 arr = [
     [
