@@ -1,5 +1,5 @@
 main:
-burst balloons
+reverse integer
 
 SQ
 maximum swap
