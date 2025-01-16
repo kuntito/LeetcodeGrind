@@ -1,5 +1,5 @@
 main:
-reverse integer
+largest rectangle in histogram
 
 SQ
 maximum swap
