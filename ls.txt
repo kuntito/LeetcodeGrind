@@ -1,5 +1,5 @@
 main:
-largest rectangle in histogram
+minimum interval to include in each query
 
 SQ
 maximum swap
