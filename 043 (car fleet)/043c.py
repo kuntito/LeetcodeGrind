@@ -7,7 +7,7 @@ import heapq
 # compare it to what yours does
 
 # https://neetcode.io/solutions/car-fleet
-# 02:58
+# 09:41
 class Solution:
     def carFleet(self, target: int, position: list[int], speed: list[int]) -> int:
         count = 0

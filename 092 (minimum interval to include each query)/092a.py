@@ -30,8 +30,9 @@ class Solution:
         return res
 
     def find_interval(self, start_idx, intervals, target, memo):
-        if target in memo:
-            return memo[target]
+        foo = (start_idx, target)
+        if foo in memo:
+            return memo[foo]
         
         min_size = None
         
@@ -49,8 +50,8 @@ class Solution:
                         min_size
                     )
             
-        memo[target] = -1 if min_size is None else min_size
-        return memo[target]
+        memo[foo] = -1 if min_size is None else min_size
+        return memo[foo]
     
     
     def find_index(self, arr, target, memo):

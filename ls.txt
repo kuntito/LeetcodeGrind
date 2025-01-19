@@ -1,5 +1,5 @@
 main:
-minimum interval to include in each query
+
 
 SQ
 maximum swap

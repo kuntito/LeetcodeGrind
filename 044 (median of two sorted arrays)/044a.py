@@ -2,6 +2,7 @@
 
 
 # TODO https://neetcode.io/solutions/median-of-two-sorted-arrays
+
 class Solution:
     def findMedianSortedArrays(self, nums1: list[int], nums2: list[int]) -> float:
         # TODO would it work with this if either array is empty
