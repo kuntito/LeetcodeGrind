@@ -4,14 +4,14 @@
 class Solution:
     def findCheapestPrice(self, n: int, flights: list[list[int]], src: int, dst: int, k: int) -> int:
         pass
+        
+        # create an adjacency list for flights
+        adj_list = self.create_adjacency_list(flights)
     
         # create a set for visited nodes
         # add the starting node, `src`
         visited = []
         visited.append(src)
-        
-        # create an adjacency list for flights
-        adj_list = self.create_adjacency_list(flights)
         
         
         # create a hashmap for each node
@@ -21,11 +21,10 @@ class Solution:
         for i in range(n):
             hashmap[i] = float("inf")
 
-        # set hashmap[0] = 0
+
         hashmap[src] = 0
-        
         count = k + 1
-        while visited and count:
+        while count:
             next_set = []
             newHash = hashmap.copy()
             
@@ -60,8 +59,9 @@ class Solution:
         return hashmap
     
 arr = [
-    [[[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], 0, 3, 1],
     [[[0,1,5],[1,2,5],[0,3,2],[3,1,2],[1,4,1],[4,2,1]], 0, 2, 2],
+    [[[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], 0, 3, 1],
+    [[[0,1,100],[1,2,100],[0,2,500]], 0, 2, 1],
 ]
 flights, src, dst, k = arr[-1]
 sol = Solution()

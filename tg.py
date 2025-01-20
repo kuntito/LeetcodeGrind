@@ -1,3 +1,4 @@
-low = -2 **31
+from collections import defaultdict
 
-print(low / 4)
+a = defaultdict(int)
+
