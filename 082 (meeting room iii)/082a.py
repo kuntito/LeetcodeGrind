@@ -4,82 +4,66 @@ import heapq
 class Solution:
     def mostBooked(self, n: int, meetings: list[list[int]]) -> int:
         pass
-        # create a hashmap to store the number of times a meeting room was used
-        room_freq = {}
-        for i in range(n):
-            room_freq[i] = 0
-        self.res = (0, 0)
+        # create a hashmap to track the amount of times a room was used
+        freq = { i : 0 for i in range(n) }
+        
+        meetings.sort()
+
+        # explore each room in sequence
+        # if the room is vacant, place the earliest meeting
+        # to aid easy retrieval of the earliest meetings
+        # sort meetings
+        
+        # go through each meeting in `meetings`
+        # place each meeting in the first vacant room
+        # track the meetings in order of completion
+        
+        # this heap is initialized as (endTime, roomIdx) where endTime = 0 since no meeting has started
+        # and `roomIdx` is every available room
+        
+        heap = [(0, i) for i in range(n)]
+        heapq.heapify(heap)
+        # heap? where you store the end of the meeting (endTime, roomIdx)
+        # this would be the location for the next meeting
+        
+        most_used = 0
+        for meet in meetings:
+            pass
+            earliestEnd, room_idx = heapq.heappop(heap)
             
-        # create an array, `meetingRooms` of size `n` representing all the meeting rooms
-        # initialize it's values to `None`
-        rooms = [None for _ in range(n)]
-        
-        
-        # heapify `meetings`, to order by the earliest starting time
-        heapq.heapify(meetings)
-        
-        endTimes = []
+            _, end = meet
+            # start += earliestEnd
+            # the next meeting's end times are incremented by the endTime of the last meeting
+            end += earliestEnd
+            
+            freq[room_idx] += 1
+            
+            heapq.heappush(
+                heap,
+                (end, room_idx)
+            )
+            
+            if freq[room_idx] > freq[most_used]:
+                most_used = room_idx
+            
+            if freq[room_idx] == freq[most_used] and room_idx < most_used:
+                most_used = room_idx
                 
-        # go through each room placing the earliest meeting in each room
-        # store the ending times of each meeting in another heap, `endTimes`
-        earliestEnd = 0
-        while meetings:
-            self.add_new_meetings(rooms, meetings, endTimes, room_freq)
-            
-            # TODO the earliest end is also a factor of the time passed before it
-            if endTimes:
-                earliestEnd = heapq.heappop(endTimes)
-                self.update_end_times(rooms, earliestEnd)
+        return most_used
         
-        print(room_freq)
-        return self.res[0]
-            
-    
-        # pop the earliest end time from `endTimes`
-        # and all end Times with the same value
-        
-        # go through each room again, updating each meeting's start time to the earliest end Time
-        # if startTime == endTime, that meeting has ended
-        # set room[idx] = None
-        
-        # repeat the cycle till you run out of meetings
-        # return the most used room
-        
-    def add_new_meetings(self, rooms, meetings, endTimes, room_freq):
-        for idx, occupant in enumerate(rooms):
-            if not meetings: break
-            
-            if occupant is None:
-                start, end = heapq.heappop(meetings)
-                
-                rooms[idx] = [start, end]
-                heapq.heappush(endTimes, end)
-                room_freq[idx] += 1
-                
-                if room_freq[idx] > self.res[1]:
-                    self.res = [idx, room_freq[idx]]
-        
-            
-    def update_end_times(self, rooms, earliestEnd):
-        for idx, occupant in enumerate(rooms):
-            if occupant is None: continue
-            
-            start, end = occupant
-            start = earliestEnd
-            
-            if start == end:
-                rooms[idx] = None
-            else:
-                rooms[idx] = [start, end]
     
     
     
 arr = [
-    [3, [[1,20],[2,10],[3,5],[4,9],[6,8]]],
     [2, [[0,10],[1,5],[2,7],[3,4],[8,11],[9,12]]],
     [2, [[0,10],[1,5],[2,7],[3,4]]],
+    [3, [[1,20],[2,10],[3,5],[4,9],[6,8]]],
+    [4, [[2, 13], [3, 12], [7, 10], [17, 19], [18, 19]]],
+    # TODO, it's not the earliest room per se
+    # it's the earliest room before the startTime of the next meeting
 ]
 foo, bar = arr[-1]
+
 
 sol = Solution()
 res = sol.mostBooked(foo, bar)

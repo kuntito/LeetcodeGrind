@@ -1,7 +1,6 @@
 # https://leetcode.com/problems/next-greater-element-i/description/
 
 # TODO https://neetcode.io/solutions/next-greater-element-i
-# look at solution
 class Solution:
     def nextGreaterElement(self, nums1: list[int], nums2: list[int]) -> list[int]:
         pass

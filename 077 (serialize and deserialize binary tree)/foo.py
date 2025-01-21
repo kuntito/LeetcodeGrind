@@ -15,17 +15,40 @@ class Node:
 # 15:04
 
 
-from collections import Counter
-
 # each recursive function should have a preorder and inorder
-# find the index of the root node in `in_map`
-# recursive calls for left child should be `preorder[:idx+1]` since `idx`
-# represents the number of elements that belong on the left side of root
-# inorder should be `inorder[:idx]`
+# the first element of `preorder` is the root node
+# TODO this works, implement it in `077a.py`
 class Solution:
     def buildTree(self, preorder: list[int], inorder: list[int]):
         pass
-        in_map = Counter(inorder)
+        if not preorder:
+            return None
+
+        in_map = { elem: i for i, elem in enumerate(inorder) }
+
+        root = Node(preorder[0])
+        # the left child of root would be in the slice `preorder[1:]`
+        # however, the length of this slice is determined by how many elements
+        # are leftwared of `root` in the `inorder`
         
-        return self.explore(preorder, inorder, in_map)
-    
+        root_inorder_idx = in_map[root.val]
+        
+        
+        root.left = self.buildTree(
+            preorder[1: 1 + root_inorder_idx],
+            inorder[:root_inorder_idx],
+        )
+        
+        root.right = self.buildTree(
+            preorder[1 + root_inorder_idx: ],
+            inorder[root_inorder_idx + 1:]
+        )
+        
+        return root
+        
+arr = [
+    [[3,9,20,15,7], [9,3,15,20,7]],
+]
+foo, bar = arr[-1]
+sol = Solution()
+res = sol.buildTree(foo, bar)
