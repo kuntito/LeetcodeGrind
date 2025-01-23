@@ -6,7 +6,6 @@ import math
 # TODO deep solution
 class Solution:
     def reverse(self, x: int) -> int:
-        pass
         MIN = -2 ** 31
         MAX = abs(MIN) - 1
         
@@ -37,7 +36,6 @@ class Solution:
             if one or two:
                 return 0
             
-            # TODO elaborate on the conditions for these guys
             if (curr < MIN // 10 or (curr == MIN // 10 and last_dig <= MIN % 10)):
                 return 0
             
@@ -46,15 +44,9 @@ class Solution:
         
         
 arr = [
-    120,
-    -123,
-    7463847412, # TODO why is the answer to this zero?
+    900000,
 ]
 foo = arr[-1]
 sol = Solution()
 res = sol.reverse(foo)
 print(res)
-
-
-# print(math.fmod(-123, 10))
-# print(-123//10)

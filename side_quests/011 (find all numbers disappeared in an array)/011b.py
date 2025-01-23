@@ -1,6 +1,7 @@
-# https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/submissions/1440684401/
+# https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/
 
 # TODO https://neetcode.io/solutions/find-all-numbers-disappeared-in-an-array
+# TODO rewrite this for clarity, then view neets solution
 class Solution:
     def findDisappearedNumbers(self, nums: list[int]) -> list[int]:
         # move elements to appropriate indices
@@ -22,8 +23,6 @@ class Solution:
             actualIdx = n - 1
             if actualIdx == idx:
                 continue
-
-            # TODO could this be placed in the recursive function?
             nums[idx] = None
             self.place_appropriately(n, actualIdx, nums)
 
@@ -45,9 +44,9 @@ class Solution:
     
 arr = [
     [1],
-    [4,3,2,7,8,2,3,1],
     [1, 1],
     [3,3,1],
+    [4,3,2,7,8,2,3,1],
 ]
 foo = arr[-1]
 sol = Solution()

@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/maximal-square/description/
 
-# TODO explore this idea properly
+# TODO https://neetcode.io/solutions/maximal-square
+# 08:38
 class Solution:
     def maximalSquare(self, matrix: list[list[str]]) -> int:
         pass
@@ -8,60 +9,51 @@ class Solution:
         # using bfs, explore the right, downRight and down neighbours
         # if they are all 1's increase the level of the square
         
+
+        rows, cols = len(matrix), len(matrix[0])
+        
         res = 0
         for ri, row in enumerate(matrix):
             for ci, val in enumerate(row):
                 if val == '1':
-                    count = self.explore_square(ri, ci, matrix)
-                    res = max(res, count)
-                    
+                    foo = self.explore((ri, ci), matrix)
+                    res = max(
+                        res,
+                        foo
+                    )
+        
         return res ** 2
     
-    def explore_square(self, start_ri, start_ci, matrix):
-        pass
-        pos = (start_ri, start_ci)
-        level = 1
-        seen = set()
     
-        arr = [pos]
-        seen.add(pos)
+    def explore(self, og, matrix):
+        pass
+        arr = [og]
+        rows, cols = len(matrix), len(matrix[0])
         
+        level = 1
         while arr:
-            tmp = []
-            while arr:
-                # coordinates of a valid position
-                currPos = arr.pop()
-                foo = self.explore_valid_neighbours(currPos, matrix, seen)
-                if not foo:
-                    return level
+            # location for next set of positions to explore
+            seen = set()
+            for pos in arr:
+                ri, ci = pos
+                neighbours = (
+                    (ri, ci + 1),
+                    (ri + 1, ci + 1),
+                    (ri + 1, ci),
+                )
                 
-                tmp.extend(foo)
+                for nei in neighbours:
+                    r, c = nei
+                    if r < 0 or r == rows or c < 0 or c == cols or matrix[r][c] == '0':
+                        return level
                     
-            arr = tmp
+                    if nei in seen: continue
+                    seen.add(nei)
+                  
+            arr = seen  
             level += 1
             
         return level
-    
-    # TODO only add neighbours that have not been seen
-    def explore_valid_neighbours(self, pos, matrix, seen):
-        ri, ci = pos
-        rows, cols = len(matrix), len(matrix[0])
-        
-        neis = [
-            (ri, ci + 1),
-            (ri + 1, ci + 1),
-            (ri + 1, ci),
-        ]
-
-        for ni in neis:
-            r, c = ni
-            if r < 0 or r == rows or c < 0 or c == cols or matrix[r][c] == '0':
-                return
-            if ni in seen:
-                pass
-            
-        return neis
-                    
                 
     
     
@@ -84,23 +76,23 @@ arr = [
         ["1","1","0","0","0","1","1","0","1","1","1","1","1","1","1","1"],
         ["1","1","1","1","1","0","1","0","1","1","1","1","1","1","1","1"],
         ["1","1","1","0","0","1","0","1","1","1","1","1","1","1","1","1"],
-    ], # TODO should be `64` not `49`
-    [
-        ["0","1"],
-        ["1","0"]
     ],
+    # [
+    #     ["0","1"],
+    #     ["1","0"]
+    # ],
     # [
     #     ["1","0","1","0","0"],
     #     ["1","0","1","1","1"],
     #     ["1","1","1","1","1"],
     #     ["1","0","0","1","0"]
     # ],
-    [
-        ["1","0","1","0","0"],
-        ["1","0","1","1","1"],
-        ["1","1","1","1","1"],
-        ["1","0","0","1","0"]
-    ]
+    # [
+    #     ["1","0","1","0","0"],
+    #     ["1","0","1","1","1"],
+    #     ["1","1","1","1","1"],
+    #     ["1","0","0","1","0"]
+    # ],
 ]
 
 

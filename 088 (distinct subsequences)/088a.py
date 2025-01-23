@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/distinct-subsequences/description/
 
-# TODO look at solution
+# https://neetcode.io/solutions/distinct-subsequences
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
         pass

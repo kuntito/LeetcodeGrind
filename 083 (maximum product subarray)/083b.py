@@ -5,19 +5,20 @@
 class Solution:
     def maxProduct(self, nums: list[int]) -> int:
         res = max(nums)
-        curMin, curMax = 1, 1
+        uno, dos = 1, 1
         
         for n in nums:
             if n == 0:
-                curMin, curMax = 1, 1
+                uno, dos = 1, 1
                 continue
             
-            tmpMax = curMax * n
-            tmpMin = curMin * n
+            tmpUno = uno * n
+            tmpDos = dos * n
             
-            curMax = max(tmpMax, tmpMin, n)
-            curMin = min(tmpMax, tmpMin, n)
-            res = max(res, curMax)
+            uno = min(tmpUno, tmpDos, n)
+            dos = max(tmpUno, tmpDos, n)
+            
+            res = max(res, dos)
             
         return res
         
@@ -32,6 +33,7 @@ arr = [
     # [-2, 10],
     # [0,-3,1,1],
     # [5, 0, 5],
+    [-2, 1, -3, -4],
     [-2, -3, -4],
 ]
 
