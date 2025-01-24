@@ -1,5 +1,5 @@
 main:
-reverse integer
+burst balloons
 
 SQ
 find all number dissapear...

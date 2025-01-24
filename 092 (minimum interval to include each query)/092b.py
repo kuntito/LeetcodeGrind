@@ -3,6 +3,8 @@ import heapq
 
 # https://neetcode.io/solutions/minimum-interval-to-include-each-query
 # 04:52
+# TODO deep the solution
+# TODO how does it compare to your binary search idea?
 class Solution:
     def minInterval(self, intervals: list[list[int]], queries: list[int]) -> list[int]:
         pass

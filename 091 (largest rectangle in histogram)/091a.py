@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/largest-rectangle-in-histogram/description/
 
+# TODO look at the answer
 class Solution:
     def largestRectangleArea(self, heights: list[int]) -> int:
         pass
@@ -11,52 +12,60 @@ class Solution:
         # two arrays, left_traverse and right_traverse
         # each index of `left_traverse` contains the index of the furthest value leftwards
         # that's >= the curr value
-        dim = len(heights)
-        self.left_traverse = [None for _ in range(dim)]
-        self.right_traverse = [None for _ in range(dim)]
+
+        # to memoize, you want to check if the next position has been explored
+        # if yes, return the explored value
         
-        # TODO, to memoize, everytime you go left or right,
-        # store the minimum that has been through a particular index
         
-        res = 0
-        for idx, val in enumerate(heights):
-            leftIdx = self.get_left(idx, heights, val)
-            rightIdx = self.get_right(idx, heights, val)
-            
-            self.left_traverse[idx] = leftIdx
-            self.right_traverse[idx] = rightIdx
-        
-            dist = rightIdx - leftIdx + 1
-            res = max(
-                res,
-                dist * heights[idx]
-            )
-                    
-        return res
-    
-        
-    def get_left(self, start_idx, heights, min_val):
-        idx = start_idx
-        
-        while idx - 1 >= 0 and heights[idx - 1] >= min_val:
-            if heights[idx - 1] == min_val:
-                return self.left_traverse[idx - 1]
-            
-            idx -= 1
-            
-        return idx
-        
-    def get_right(self, start_idx, heights, min_val):
-        idx = start_idx
-        while idx + 1 < len(heights) and heights[idx + 1] >= min_val:
-            if heights[idx + 1] == min_val and self.right_traverse[idx + 1]:
-                return self.right_traverse[idx + 1]
-            idx += 1
-            
-        return idx
+        # first, how do you store the explored value for each position
+        # with memo, after exploring each position, store the left and right result as a tuple
+        memo = [None for _ in heights]
         
 
+        maxArea = 0
+        for idx, h in enumerate(heights):
+            left_idx = self.get_left(h, idx, heights, memo)
+            right_idx = self.get_right(h, idx, heights, memo)
+            
+            dist = (right_idx - left_idx) + 1
+            area = dist * h
+            
+            maxArea = max(area, maxArea)
+            memo[idx] = (left_idx, right_idx)
+            
+        return maxArea
+
+
+    def get_left(self, min_height, start_idx, heights, memo):
+        idx = start_idx
+        while idx - 1 >= 0 and heights[idx - 1] >= min_height:
+            idx -= 1
+            curr_pos = heights[idx]
+            # to check the memo
+            # if there is a next value
+            # if the next value is equal to min_height
+            # if the next value has been explored, return it's left index
+            next_pos_idx = idx - 1
+            next_pos = heights[next_pos_idx] if next_pos_idx >= 0 else None
+            if next_pos and next_pos == min_height:
+                return memo[next_pos_idx][0]
+                
+            
+        return idx
+    
+    def get_right(self, min_height, start_idx, heights, memo):
+        idx = start_idx
+        dim = len(heights)
         
+        while idx + 1 < dim and heights[idx + 1] >= min_height:
+            idx += 1
+            
+            next_idx = idx + 1
+            next_pos = heights[next_idx] if next_idx < dim else None
+            if next_pos and next_pos == min_height and memo[next_idx]:
+                return memo[next_idx][1]
+            
+        return min(idx, dim-1)
             
         
 arr = [
