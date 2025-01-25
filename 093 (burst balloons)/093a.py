@@ -2,12 +2,11 @@
 
 import heapq
 
+# TODO https://neetcode.io/solutions/burst-balloons
+# 00:00
 class Solution:
     def maxCoins(self, nums: list[int]) -> int:
         pass
-        # a loop, on each iteration, find the smallest balloon with the largest
-        # neighbours
-            
             
     def get_product(self, idx, arr):
         left = arr[idx - 1] if idx - 1 >= 0 else 1
