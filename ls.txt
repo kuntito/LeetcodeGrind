@@ -1,5 +1,1 @@
-main:
-median of two sorted arrays
-
-SQ
-find all number dissapear...
+number of good pairs
