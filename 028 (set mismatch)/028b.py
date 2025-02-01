@@ -1,23 +1,24 @@
 # https://leetcode.com/problems/set-mismatch/description/
 from collections import Counter
 
-# TODO https://www.youtube.com/watch?v=d-ulaeRBA64
-# 04:17
+
 class Solution:
     def findErrorNums(self, nums: list[int]) -> list[int]:
         num_map = Counter(nums)
 
-        res = []
+        duplicate, omit = None, None
         for n in range(1, len(nums) + 1):
-            if num_map[n] == 2 or num_map[n] == 0:
-                res.append(n)
+            if num_map[n] == 2:
+                duplicate = n
+            if num_map[n] == 0:
+                omit = n
 
-        return res
+        return [duplicate, omit]
             
     
 arr = [
     [1,2,2,4],
-    [2, 2], # TODO res should be `[2, 1]`
+    [2, 2],
 ]
 foo = arr[-1]
 sol = Solution()
