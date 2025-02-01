@@ -4,23 +4,25 @@
 class Solution:
     def getRow(self, rowIndex: int) -> list[int]:
         pass
-        # create an array of size `rowIndex + 1`
-        dim = rowIndex + 1
-        arr = [1 for _ in range(dim)]
+        res = [1]
         
-        for i in range(2, dim):
-            clone = arr[::]
-            for j in range(i, dim-1):
-                pass
-                clone[j] = clone[j] + clone[j-1]
+        dim = rowIndex
+        for i in range(dim):
+            pass
+            temp = [0 for _ in range(len(res) + 1)]
+            for j, val in enumerate(res):
+                temp[j] += val
+                temp[j + 1] += val
                 
+            res = temp
         
-        return arr
+        return res
+
 
 arr = [
     0,
-    3,
     4,
+    3,
 ]
 foo = arr[-1]
 sol = Solution()

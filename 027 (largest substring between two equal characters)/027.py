@@ -3,14 +3,19 @@
 class Solution:
     def maxLengthBetweenEqualCharacters(self, s: str) -> int:
         char_map = {}
-        res = None
+        
         for idx in range(len(s) - 1, -1, -1):
             ch = s[idx]
-            if ch not in char_map:
-                char_map[ch] = idx
+            # including the last occurrence of each character
+            if ch in char_map: continue
+            char_map[ch] = idx
 
+        res = None
         for idx, ch in enumerate(s):
-            if ch in char_map and char_map[ch] > idx:
+            if ch not in char_map: continue
+            
+            # if the last index of ch has been determined
+            if char_map[ch] > idx:
                 diff = char_map[ch] - (idx + 1)
                 res = diff if res is None else max(res, diff)
                 del char_map[ch]
@@ -20,9 +25,9 @@ class Solution:
     
 arr = [
     "abca",
-    "aa",
     "cbzxy",
     "mgntdygtxrvxjnwksqhxuxtrv",
+    "aa",
 ]
 foo = arr[-1]
 sol = Solution()
