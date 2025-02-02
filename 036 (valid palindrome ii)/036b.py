@@ -7,7 +7,7 @@ class Solution:
     
 arr = [
     "aba",
-    "abc",
+    "abca",
 ]
 foo = arr[-1]
 sol = Solution()

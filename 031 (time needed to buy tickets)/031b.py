@@ -1,27 +1,20 @@
 # https://leetcode.com/problems/time-needed-to-buy-tickets/description/
 
-
-# TODO https://www.youtube.com/watch?v=cVmS9N6kf2Y
-# 2:35
-from collections import deque
+# TODO https://neetcode.io/solutions/time-needed-to-buy-tickets
 class Solution:
     def timeRequiredToBuy(self, tickets: list[int], k: int) -> int:
-        queue = deque()
-        for idx, tic in enumerate(tickets):
-            queue.append((idx, tic))
+        pass
 
-        count = 0
-        while queue:
-            idx, tic = queue.popleft()
+        res = 0
 
-            # remove and decrement tic from the start of queue
-            # if `tic > 0`, increment count
-            # append (idx, tic) to queue
-
-            # if tic == 0 and idx == k:
-            # return count
-
-
+        for i in range(len(tickets)):
+            if i <= k:
+                res += min(tickets[i], tickets[k])
+            else:
+                # TODO deep this condition
+                res += min(tickets[i], tickets[k] - 1)
+        
+        return res
 
 
 
