@@ -1,6 +1,5 @@
 # https://leetcode.com/problems/assign-cookies/description/
 
-# TODO https://neetcode.io/solutions/assign-cookies
 class Solution:
     def findContentChildren(self, g: list[int], s: list[int]) -> int:
         g.sort()
@@ -10,7 +9,6 @@ class Solution:
         size_idx = 0
         greed_idx = 0
 
-        count = 0
         while size_idx < len(s) and greed_idx < len(g):
             # starting with the first idx in `s`
             # get the size and move through each value in `g`
@@ -20,12 +18,11 @@ class Solution:
             # move greed idx forward
             if size >= greed:
                 greed_idx += 1
-                count += 1
             size_idx += 1
             # move size idx forward
             # if `size` < greed:
             # move `size idx` forward
-        return count
+        return greed_idx
 
     
 arr = [

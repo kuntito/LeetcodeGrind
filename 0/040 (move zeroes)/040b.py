@@ -1,14 +1,13 @@
 # https://leetcode.com/problems/move-zeroes/description/
 
-# TODO why does this work?
 class Solution:
     def moveZeroes(self, nums: list[int]) -> None:
-        l = 0
-        for r in range(len(nums)):
-            if nums[r]:
-                nums[l], nums[r] = nums[r], nums[l]
-                l += 1
-        return nums
+        s = 0
+        for idx in range(len(nums)):
+            val = nums[idx]
+            if val:
+                nums[idx], nums[s] = nums[s], nums[idx]
+                s += 1
 
 
 
