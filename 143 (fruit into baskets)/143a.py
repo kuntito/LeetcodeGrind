@@ -15,30 +15,22 @@ class Solution:
         res = None
         basket = {}
         for right in range(dim):
-            pass
             ft = fruits[right]
-            if ft not in basket and len(basket) == 2:
-                dist = (right - left) + 1
-                if res is None:
-                    res = dist
-                else:
-                    res = max(res, dist)
-                    
+            if len(basket) == 2 and ft not in basket:
                 while len(basket) == 2:
                     leftFruit = fruits[left]
                     basket[leftFruit] -= 1
+                    
                     if basket[leftFruit] == 0:
                         del basket[leftFruit]
+                    
                     left += 1
             
-            
             basket[ft] = basket.get(ft, 0) + 1
-        
-        dist = (len(fruits) - left) + 1
-        if res is None:
-            res = dist
-        else:
-            res = max(dist, res)
+            
+            if len(basket) <= 2:
+                dist = (right - left) + 1
+                res = dist if res is None else max(res, dist)
         
         return res
     
