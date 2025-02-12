@@ -4,53 +4,56 @@ import heapq
 class Solution:
     def mostBooked(self, n: int, meetings: list[list[int]]) -> int:
         pass
-        # create a hashmap to track the amount of times a room was used
-        freq = { i : 0 for i in range(n) }
+        # create hashmap to store the frequency of each meeting room
+        room_freq = {idx:0  for idx in range(n)}
         
-        meetings.sort()
-
-        # explore each room in sequence
-        # if the room is vacant, place the earliest meeting
-        # to aid easy retrieval of the earliest meetings
-        # sort meetings
+        # sort meetings in reverse to get the earliest meeting
+        meetings.sort(reverse=True)
         
-        # go through each meeting in `meetings`
-        # place each meeting in the first vacant room
-        # track the meetings in order of completion
+        # create an array to store meeting rooms in descending order
+        rooms = [i for i in range(n-1, -1, -1)]
         
-        # this heap is initialized as (endTime, roomIdx) where endTime = 0 since no meeting has started
-        # and `roomIdx` is every available room
+        # create a heap, to store the (end time, meeting room)
+        endTimes = []
         
-        heap = [(0, i) for i in range(n)]
-        heapq.heapify(heap)
-        # heap? where you store the end of the meeting (endTime, roomIdx)
-        # this would be the location for the next meeting
+        # for each meeting in `meetings`
+        # check `minHeap` if the end time of the earliest meeting
+        # is lower than the the start Time of the new meeting
+        # if this is true, the new meeting will simply use that room
+        # else if there is vacant room, the new meeting will use that vacant room
+        # else the new meeting will update it's end time to 
+        # the endTime of earliest meeting and use the room
         
         most_used = 0
-        for meet in meetings:
-            pass
-            earliestEnd, room_idx = heapq.heappop(heap)
+        while meetings:
+            newMeeting = meetings.pop()
+            start, end = newMeeting
             
-            _, end = meet
-            # start += earliestEnd
-            # the next meeting's end times are incremented by the endTime of the last meeting
-            end += earliestEnd
-            
-            freq[room_idx] += 1
-            
-            heapq.heappush(
-                heap,
-                (end, room_idx)
-            )
-            
-            if freq[room_idx] > freq[most_used]:
-                most_used = room_idx
-            
-            if freq[room_idx] == freq[most_used] and room_idx < most_used:
-                most_used = room_idx
+            roomIdx = None
+            if endTimes and endTimes[0][0] <= start:
+                roomIdx = endTimes[0][1]
                 
-        return most_used
+                    
+                heapq.heappop(endTimes)
+                heapq.heappush(endTimes, (end, roomIdx))
+            elif rooms:
+                roomIdx = rooms.pop()
+                
+                heapq.heappush(endTimes, (end, roomIdx))
+            else:
+                earliestEnd, roomIdx = endTimes[0]
+                end += earliestEnd
+                heapq.heappop(endTimes)
+                heapq.heappush(endTimes, (end, roomIdx))
+                
+            room_freq[roomIdx] += 1
+            most_used = max(most_used, room_freq[roomIdx])
         
+
+        print(room_freq)
+        for idx in range(n):
+            if room_freq[idx] == most_used:
+                return idx    
     
     
     
@@ -58,9 +61,13 @@ arr = [
     [2, [[0,10],[1,5],[2,7],[3,4],[8,11],[9,12]]],
     [2, [[0,10],[1,5],[2,7],[3,4]]],
     [3, [[1,20],[2,10],[3,5],[4,9],[6,8]]],
+    # TODO, you want to put the new meeting in the earliest room
+    # not the meeting that finishes first
+    # for instance, all three meetings finish before `[17, 19]`
+    # the current implementation seeks the earliest room
+    # and as a result places the meeting in room[2]
+    # when the earliest room is in fact room[0]
     [4, [[2, 13], [3, 12], [7, 10], [17, 19], [18, 19]]],
-    # TODO, it's not the earliest room per se
-    # it's the earliest room before the startTime of the next meeting
 ]
 foo, bar = arr[-1]
 
