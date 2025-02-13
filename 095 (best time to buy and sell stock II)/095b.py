@@ -1,8 +1,7 @@
 # https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/
 
-# TODO look at the answer
+# TODO look at answer
 # https://neetcode.io/solutions/best-time-to-buy-and-sell-stock-ii
-# 01:58
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
         pass
@@ -27,37 +26,37 @@ class Solution:
     
         
         if is_buying:
-            maxProfit = 0
-            for idx in range(start_idx, dim):
-                cost_price = prices[idx]
-                foo = self.explore(cost_price, idx + 1, False, prices, memo)
-                maxProfit = max(foo, maxProfit)
-            
-            memo[mi] = maxProfit
-            return maxProfit
+            cost_price = prices[start_idx]
+            foo = self.explore(cost_price, start_idx, False, prices, memo)
+            memo[mi] = foo
+            return memo[mi]
         
+
         maxProfit = 0
         if not is_buying:
-            pass
             for idx in range(start_idx, dim):
                 sell_price = prices[idx]
-                profit = sell_price - cost_price
-                if profit:
-                    profit += self.explore(0, idx + 1, True, prices, memo)
-                    
+                if sell_price < cost_price: continue
+                
+                profitSoFar = sell_price - cost_price
+                profitSoFar += self.explore(0, idx + 1, True, prices, memo)
+                
                 maxProfit = max(
                     maxProfit,
-                    profit
+                    profitSoFar
                 )
                 
         memo[mi] = maxProfit
-        return maxProfit
+        return memo[mi]
+                
         
         
 arr = [
     [1, 2, 3],
-    [1,2,3,4,5],
+    [2, 1, 5],
     [7,6,4,3,1],
+    [7,1,5,3,6,4],
+    [1,2,3,4,5],
 ]
 foo = arr[-1]
 sol = Solution()

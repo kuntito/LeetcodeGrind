@@ -13,10 +13,9 @@ class StockSpanner:
             self.monotoneStack.pop()
             
         prevIdx = self.monotoneStack[-1][1] if self.monotoneStack else None
+        self.monotoneStack.append((price, self.curIdx))
         
         res = 1 if prevIdx is None else self.curIdx - prevIdx
-        
-        self.monotoneStack.append((price, self.curIdx))
         self.curIdx += 1
         return res
             
@@ -32,5 +31,3 @@ print(sol.next(80))
 print(sol.next(60))
 print(sol.next(70))
 print(sol.next(60))
-print(sol.next(75))
-print(sol.next(85))
