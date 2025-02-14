@@ -9,3 +9,13 @@ class Solution:
                 stack.pop()
                 
         return len(stack)
+    
+arr = [
+    [31, [5,26,18,25,29,21,22,12,19,6], [7,6,6,4,3,4,9,7,6,4]],
+]
+
+target, foo, bar = arr[-1]
+sol = Solution()
+
+res = sol.carFleet(target, foo, bar)
+print(res)

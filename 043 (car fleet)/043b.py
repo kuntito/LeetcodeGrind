@@ -6,6 +6,15 @@ import heapq
 # explore what it does
 # compare it to what yours does
 
+# what you've done is drive the cars to their extreme then compare their end points
+# consider (29, 3) and (26, 6)
+# both would meet at 32
+# but at 31, the finish line, they don't cross and would be considered as two fleets
+# your code should sort
+# starting from behind calculate the time each car would reach target
+# if that time is less than the next car, that car is a fleet
+# else it means, it would merge with the next car
+
 # https://neetcode.io/solutions/car-fleet
 # 09:41
 class Solution:
@@ -81,11 +90,12 @@ class Solution:
             
             # every car that drives should not have a new position > `minHeap[0]`
             # car new position = min(newPosition, minHeapLowestPosition)
-            if minHeap and new_pos >= minHeap[0][0]:
-                new_pos = minHeap[0][0]
-                sp = minHeap[0][1]
+            # if minHeap and new_pos >= minHeap[0][0]:
+            if not minHeap or new_pos < minHeap[0][0]:
+                # new_pos = minHeap[0][0]
+                # sp = minHeap[0][1]
             
-            heapq.heappush(minHeap, (new_pos, sp))
+                heapq.heappush(minHeap, (new_pos, sp))
             
         return minHeap
         
@@ -104,10 +114,10 @@ class Solution:
 arr = [
     [12, [10,8,0,5,3], [2,4,1,1,3]],
     [100, [0, 2, 4], [4, 2, 1]],
-    [31, [5,26,18,25,29,21,22,12,19,6], [7,6,6,4,3,4,9,7,6,4]],
     [10, [3], [3]],
+    # [31, [5,26,18,25,29,21,22,12,19,6], [7,6,6,4,3,4,9,7,6,4]],
     [21, [1,15,6,8,18,14,16,2,19,17,3,20,5], [8,5,5,7,10,10,7,9,3,4,4,10,2]],
-    # TODO why does my code return `8` when the answer is `7`?
+    [31, [5,26,18,25,29,21,22,12,19,6], [7,6,6,4,3,4,9,7,6,4]],
 ]
 
 target, foo, bar = arr[-1]
