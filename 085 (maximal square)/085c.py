@@ -1,58 +1,51 @@
 # https://leetcode.com/problems/maximal-square/description/
 
 # TODO https://neetcode.io/solutions/maximal-square
+# 06:24
+# TODO compare with 085b.py
+# why did i think storing the value in each cell won't work?
 class Solution:
     def maximalSquare(self, matrix: list[list[str]]) -> int:
         pass
-        # iterate through the grid for every position with `1`
-        # using bfs, explore the right, downRight and down neighbours
-        # if they are all 1's increase the level of the square
+        # starting from the bottom right
+        # explore each cell where the value is `1`
+        # store the amount of squares you can get from that point onwards
+        # and assign the value, `matrix[ri][ci] = explore(...)` 
         
-
+        # for each subsequent cell 
+        # if the value is `1`, do the same for it's right, downRight and down children
+        # matrix[ri][ci] = min(right, downRight, down) + 1
+        
         rows, cols = len(matrix), len(matrix[0])
+
+        res = 0        
+        for ri in range(rows - 1, -1, -1):
+            for ci in range(cols-1, -1, -1):
+                right = self.explore(ri, ci + 1, matrix)
+                downRight = self.explore(ri + 1, ci + 1, matrix)
+                down = self.explore(ri + 1, ci, matrix)
+                
+                val = int(matrix[ri][ci])
+                
+                matrix[ri][ci] = val + min(right, downRight, down) if val == 1 else 0
+                res = max(
+                    res,
+                    matrix[ri][ci]
+                )
         
-        res = 0
-        for ri, row in enumerate(matrix):
-            for ci, val in enumerate(row):
-                if val == '1':
-                    foo = self.explore((ri, ci), matrix)
-                    res = max(
-                        res,
-                        foo
-                    )
+        # for rw in matrix:
+        #     print(rw)
         
         return res ** 2
-    
-    
-    def explore(self, og, matrix):
-        pass
-        arr = [og]
-        rows, cols = len(matrix), len(matrix[0])
         
-        level = 1
-        while arr:
-            # location for next set of positions to explore
-            seen = set()
-            for pos in arr:
-                ri, ci = pos
-                neighbours = (
-                    (ri, ci + 1),
-                    (ri + 1, ci + 1),
-                    (ri + 1, ci),
-                )
-                
-                for nei in neighbours:
-                    r, c = nei
-                    if r < 0 or r == rows or c < 0 or c == cols or matrix[r][c] == '0':
-                        return level
-                    
-                    if nei in seen: continue
-                    seen.add(nei)
-                  
-            arr = seen  
-            level += 1
-            
-        return level
+        
+    def explore(self, sri, sci, arr):
+        rows, cols = len(arr), len(arr[0])
+        if sri < 0 or sri == rows or sci < 0 or sci == cols:
+            return 0
+        
+        return int(arr[sri][sci])
+
                 
     
     
@@ -92,6 +85,11 @@ arr = [
     #     ["1","1","1","1","1"],
     #     ["1","0","0","1","0"]
     # ],
+    [
+        ["1","1","0","1"],
+        ["1","1","0","1"],
+        ["1","1","1","1"]
+    ]
 ]
 
 
