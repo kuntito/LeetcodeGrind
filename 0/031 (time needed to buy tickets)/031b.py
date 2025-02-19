@@ -1,6 +1,5 @@
 # https://leetcode.com/problems/time-needed-to-buy-tickets/description/
 
-# TODO https://neetcode.io/solutions/time-needed-to-buy-tickets
 class Solution:
     def timeRequiredToBuy(self, tickets: list[int], k: int) -> int:
         pass
@@ -11,7 +10,6 @@ class Solution:
             if i <= k:
                 res += min(tickets[i], tickets[k])
             else:
-                # TODO deep this condition
                 res += min(tickets[i], tickets[k] - 1)
         
         return res
@@ -24,6 +22,8 @@ class Solution:
 arr = [
     [[5,1,1,1], 0],
     [[2,3,2], 2],
+    [[2,1, 3,2], 2],
+    [[1,1,1,1,2], 3],
 ]
 foo, bar = arr[-1]
 sol = Solution()

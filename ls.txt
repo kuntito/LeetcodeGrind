@@ -1,2 +1,3 @@
+043 - sort by parity
 Relearn minimum spanning tree
 binary subarrays with sum
