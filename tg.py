@@ -1,3 +1,4 @@
-a = [0, 1, 2]
-
-print(a[1:])
+for i in range(3):
+    for j in range(3):
+        print(f'{i}{j} ', end="")
+    print()
