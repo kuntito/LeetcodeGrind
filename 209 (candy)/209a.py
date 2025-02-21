@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/candy/description/
 
+
 class Solution:
     def candy(self, ratings: list[int]) -> int:
         pass
