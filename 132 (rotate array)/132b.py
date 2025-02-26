@@ -2,6 +2,8 @@
 
 # TODO, the problem is when k=2 and len(nums) == 4
 # the function only rotates the last element
+
+# TODO is the problem only with even number of `k`? or when `k` is half of len(nums)
 class Solution:
     def rotate(self, nums: list[int], k: int) -> None:
         """
@@ -37,9 +39,9 @@ class Solution:
         return (currIdx + steps) % len(arr)
     
 arr = [
-    [[-1,-100,3,99], 2],
     [[1,2,3,4,5,6,7], 3],
     [[1,2,3,4], 3],
+    [[-1,-100,3,99], 2],
 ]
 foo, bar = arr[-1]
 sol = Solution()

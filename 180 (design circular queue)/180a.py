@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/design-circular-queue/description/
 
+# 
 class MyCircularQueue:
 
     def __init__(self, k: int):
@@ -15,7 +16,6 @@ class MyCircularQueue:
         if self.size == self.dim:
             return False
     
-        # TODO the append should be based on the end index
         self.endIdx += 1
         insertIdx = self.endIdx % self.dim
         self.queue[insertIdx] = value

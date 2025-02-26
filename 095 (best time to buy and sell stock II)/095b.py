@@ -27,8 +27,10 @@ class Solution:
         
         if is_buying:
             cost_price = prices[start_idx]
-            foo = self.explore(cost_price, start_idx, False, prices, memo)
-            memo[mi] = foo
+            
+            # `foo` is the maximum you can get if you sell from `startIdx` onwards
+            maxSell = self.explore(cost_price, start_idx, False, prices, memo)
+            memo[mi] = maxSell
             return memo[mi]
         
 
@@ -38,7 +40,10 @@ class Solution:
                 sell_price = prices[idx]
                 if sell_price < cost_price: continue
                 
+                # you sold here
                 profitSoFar = sell_price - cost_price
+                
+                # now, exploring what happens if you buy at the next index
                 profitSoFar += self.explore(0, idx + 1, True, prices, memo)
                 
                 maxProfit = max(
