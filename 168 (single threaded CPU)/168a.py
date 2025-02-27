@@ -5,17 +5,28 @@ import heapq
 class Solution:
     def getOrder(self, tasks: list[list[int]]) -> list[int]:
         pass
-        # put all tasks into a `minHeap` based on (processTime, enqueueTime)
+        # you want to select the task with the shortest processing time
+        # that can start at the current time `t`
         
-        # get the task with the smallest processing time such that
-        # it's enqueueTime > time
-        # if no such time exists, set time to the enqueueTime of the smallest
-        # task
+        # if there are clashes, pick the one with the smallest index
         
-        # twoHeaps, the second heap would store any `processTime` with `enqueueTime < time`
+        # you need to know what tasks are available at what time
         
-        minHeap = []
-        for enTime, procTime in tasks:
-            heapq.heappush(minHeap, (procTime, enTime))
-            
-        time = 1
+        # one heap where the tasks are sorted by enqueueTime, `startHeap`
+        # the start time is the time of the first element
+        
+        # select that heap and append it's index to `res`
+        # currTime = enqueue time of that element
+        # calculate the end time as currTime += processingTime
+        
+        # for every element in `startHeap` who's start time is less than `currTime`
+        # append to a newHeap, `processHeap`
+        # the key of this heap would be the process time
+        
+        # subsequent selections would be from this heap
+        # as the indices are appended to `res`
+        # and `currTime` is updated
+        
+        # once you run out of `processHeap` items
+        # currTime becomes the enqueueTime of the first item in `startHeap`
+        # and the process repeats till you run out of elements
