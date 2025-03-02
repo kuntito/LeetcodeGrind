@@ -18,31 +18,38 @@ class Solution:
         # `arr` is a 2d array that contains all the valid combinations seen so far
         
         arr = [
-            [0, 0, 0, 0]
+            "0000"
         ]
         
-        deadends = set(deadends)
+        count = 0
+        seen = set(deadends)
         # you'd have to convert the combinations to string to check for deadends
         while arr:
             tmp = []
             for comb in arr:
-                for c in self.get_new_combinations(comb):
-                    # TODO i think you should add visited positions to deadends
-                    # so you don't visit the same position more than once
-                    if c in deadends:
-                        continue
-
+                if comb == target:
+                    return count
+                seen.add(comb)
+                
+                comb_int = [int(d) for d in comb]
+                newCombs = self.get_new_combinations(comb_int, seen)
+                tmp.extend(newCombs)
+            arr = tmp
+            count += 1
             
         return -1
 
-    def get_new_combinations(self, comb):
+    def get_new_combinations(self, comb, seen):
         pass
         res = []
         for idx, dig in enumerate(comb):
             clone = comb[::]
-            for newPos in self.get_digits(dig):
+            for newPos in self.get_digits(int(dig)):
                 clone[idx] = newPos
-                res.append("".join(str(d) for d in clone))
+                newComb = "".join(str(d) for d in clone)
+                if newComb in seen: continue
+                
+                res.append(newComb)
                 
         return res
     
@@ -61,7 +68,12 @@ class Solution:
         
         return posOne, posTwo
     
+arr = [
+    [["0201","0101","0102","1212","2002"], "0202"],
+    [["8887","8889","8878","8898","8788","8988","7888","9888"], "8888"]
+]
+foo, bar = arr[-1]
 sol = Solution()
-res = sol.get_new_combinations([0, 0])
+res = sol.openLock(foo, bar)
 
 print(res)

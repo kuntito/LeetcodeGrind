@@ -1,32 +1,56 @@
 # https://leetcode.com/problems/single-threaded-cpu/description/
 
-import heapq
 # TODO solve it!
+import heapq
 class Solution:
     def getOrder(self, tasks: list[list[int]]) -> list[int]:
         pass
-        # you want to select the task with the shortest processing time
-        # that can start at the current time `t`
+        indexedTasks = self.get_indexed_tasks(tasks)
+        # sort based on enqueueTime since that's the first element in each tuple
+        indexedTasks.sort(reverse=True)
         
-        # if there are clashes, pick the one with the smallest index
+        # the queue stores tasks based on processing time
+        _, procTime, idx = indexedTasks.pop()
+        queue = [(procTime, idx)]
         
-        # you need to know what tasks are available at what time
+        res = []
+        currTime = 1
+        while indexedTasks or queue:
+            if not queue:
+                newEnqTime, newProcTime, newIdx = indexedTasks.pop()
+                currTime = newEnqTime + newProcTime
+                heapq.heappush(queue, (newProcTime, newIdx))
+                
+            
+            procTime, idx = heapq.heappop(queue)
+            currTime += procTime
+            res.append(idx)
+
+            while indexedTasks and currTime >= indexedTasks[-1][0]:
+                _, newProcTime, newIdx = indexedTasks.pop()
+                heapq.heappush(queue, (newProcTime, newIdx))
         
-        # one heap where the tasks are sorted by enqueueTime, `startHeap`
-        # the start time is the time of the first element
         
-        # select that heap and append it's index to `res`
-        # currTime = enqueue time of that element
-        # calculate the end time as currTime += processingTime
+        return res
         
-        # for every element in `startHeap` who's start time is less than `currTime`
-        # append to a newHeap, `processHeap`
-        # the key of this heap would be the process time
+    def get_indexed_tasks(self, tasks):
+        arr = []
+        for idx, item in enumerate(tasks):
+            enqTime, procTime = item
+            arr.append((enqTime, procTime, idx))
+            
+        return arr
         
-        # subsequent selections would be from this heap
-        # as the indices are appended to `res`
-        # and `currTime` is updated
+
         
-        # once you run out of `processHeap` items
-        # currTime becomes the enqueueTime of the first item in `startHeap`
-        # and the process repeats till you run out of elements
+        
+        
+        
+arr = [
+    [[1,2],[2,4],[3,2],[4,1]],
+    [[7,10],[7,12],[7,5],[7,4],[7,2]],
+]
+foo = arr[-1]
+sol = Solution()
+res = sol.getOrder(foo)
+print(res)
