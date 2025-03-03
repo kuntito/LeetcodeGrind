@@ -23,6 +23,8 @@ class Solution:
             uno = -1 * heapq.heappop(maxHeap)
             dos = -1 * heapq.heappop(maxHeap)
             
+            print(uno, dos)
+            
             rem = abs(uno-dos)
             if rem > 0:
                 heapq.heappush(maxHeap, -rem)

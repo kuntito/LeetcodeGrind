@@ -1,5 +1,7 @@
-extra characters in a string
-
+candy
 043 - sort by parity
-Relearn minimum spanning tree
 binary subarrays with sum
+
+view solutions:
+integer break
+last stone weight ii
