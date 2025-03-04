@@ -61,6 +61,7 @@ arr = [
     [2, [[0,10],[1,5],[2,7],[3,4],[8,11],[9,12]]],
     [2, [[0,10],[1,5],[2,7],[3,4]]],
     [3, [[1,20],[2,10],[3,5],[4,9],[6,8]]],
+    
     # TODO, you want to put the new meeting in the earliest room
     # not the meeting that finishes first
     # for instance, all three meetings finish before `[17, 19]`

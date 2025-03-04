@@ -2,16 +2,17 @@
 
 class Solution:
     def integerBreak(self, n: int) -> int:
-        pass
-        # possibly a dynamic programming problem
-        # you calculate all the possiblities for every number
-        # and memoize it
-        # the possiblity range is (1, n//2)
-        #
-        
-        # loop from 1 to n//2
-        # for each number, explore `i`
-        
-        # when exploring `i`
-        # you want to do the same thing
-        # the base cases are i == 1 and i == 2
+        memo = {1: 1}
+        self.n = n
+        return self.explore(n, memo)
+
+    def explore(self, num, memo):
+        if num in memo:
+            return memo[num]
+
+        memo[num] = 0 if num == self.n else num
+        for i in range(1, num//2 + 1):
+            val = self.explore(i, memo) * self.explore(num - i, memo)
+            memo[num] = max(memo[num], val)
+        return memo[num]
+    

@@ -2,6 +2,8 @@
 
 # TODO compare with asteroid collision
 
+# TODO https://neetcode.io/solutions/last-stone-weight-ii
+# 13:20
 import heapq
 class Solution:
     def lastStoneWeightII(self, stones: list[int]) -> int:

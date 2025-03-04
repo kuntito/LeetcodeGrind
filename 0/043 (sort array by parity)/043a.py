@@ -1,14 +1,15 @@
 # https://leetcode.com/problems/sort-array-by-parity/description/
 
-# TODO https://neetcode.io/solutions/sort-array-by-parity
 class Solution:
     def sortArrayByParity(self, nums: list[int]) -> list[int]:
         dim = len(nums)
 
-        # place `oddIdx` at the first number
+        # place `oddIdx` at the first odd number
         oddIdx = 0
         while oddIdx < dim and nums[oddIdx] % 2 == 0:
             oddIdx += 1
+        if oddIdx == dim:
+            return nums
         
         evenIdx = oddIdx + 1
         # `evenIdx` starts after the first odd number
