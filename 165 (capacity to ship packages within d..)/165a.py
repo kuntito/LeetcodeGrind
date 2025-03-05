@@ -16,22 +16,29 @@ class Solution:
         
         weights.sort()
         # determine a function that checks if `target` can take all the weights
+        
+        # the lower bound is the largest weight since the ship has to be big enough to take that weight
+        # i did put a lot of thought into the upper bound but it cannot be more than the total of all the ships
         left, right = weights[-1], sum(weights)
         
         # TODO critique the bin search conditions
         while left <= right:
             mid = (left + right) // 2
             
-            valid_mid = self.can_take(mid, days, weights)
-            beforeMid = self.can_take(mid - 1, days, weights)
-            if valid_mid and not beforeMid:
+            isMidFit = self.can_take(mid, days, weights)
+            isBeforeMidFit = self.can_take(mid - 1, days, weights)
+            
+            if isMidFit and not isBeforeMidFit:
                 return mid
-            elif not valid_mid:
-                left = mid + 1
-            else:
+            elif isMidFit and isBeforeMidFit:
                 right = mid - 1
+            else:
+                left = mid + 1
         
         
+    # TODO rewrite this function, maximizing the capacity doesn't mean taking the smallest number
+    # see `[[3,2,2,4,1,4], 3]`, the answer is `6` but the current implementation says `6` cannot take
+    # all ships
     def can_take(self, capacity, ship_count, arr):
         tmp = 0
         count = 0
@@ -48,10 +55,11 @@ class Solution:
         if tmp > 0:
             count += 1
         
-        return count == ship_count
+        return count <= ship_count
     
 arr = [
     [[1,2,3,4,5,6,7,8,9,10], 5],
+    [[3,2,2,4,1,4], 3]
 ]
 foo, bar = arr[-1]
 sol = Solution()
