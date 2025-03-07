@@ -1,5 +1,8 @@
-reverse words in a string
-binary subarrays with sum
+matchsticks to a square
+
 
 view solutions:
-last stone weight ii
+    last stone weight ii
+    search in rotated sorted array
+    reverse words in a string
+    binary subarrays with sum

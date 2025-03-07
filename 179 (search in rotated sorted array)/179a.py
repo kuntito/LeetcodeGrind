@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/
 
+# TODO write O(log n) solution
 class Solution:
     def search(self, nums: list[int], target: int) -> bool:
         pass

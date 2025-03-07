@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/
 
-class Node:
+class TreeNode:
     def __init__(self, val, left=None, right=None):
         self.val = val
         self.left = left
@@ -14,86 +14,101 @@ class Node:
 
 from collections import deque
 
-# TODO write out the pseudocode
-# https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/ shows a binary tree can be constructed from it's preorder and inorder traversal
 class Codec:
+    # the idea is to obtain the preOrder traversal and inorderTraversal of the tree
+    # represent these traversals as comma separated values
+    # delimit both traversals with a &
+    # i.e. F,O,O&B,A,R
+    def __init__(self):
+        self.delimiter = '&'
+    
+    # the use both traversals to deserialize into a binary tree
+    def serialize(self, root) -> str:
+        
+        pass
+    
+        preOrder = []
+        pre_csv = self.explore_preorder(root, preOrder)
+        
+        inOrder = []
+        in_csv = self.explore_inorder(root, inOrder)
 
-    def serialize(self, root):
-        inorder = []
-        preorder = []
-        self.exploreInOrder(root, inorder)
-        self.explorePreOrder(root, preorder)
 
-        res = []
-        for preNode, inNode in zip(inorder, preorder):
-            res.append(
-                f"{preNode}-{inNode}"
-            )
+        get_csv = lambda arr: ",".join([str(dig) for dig in arr])
+        pre_csv = get_csv(preOrder)
+        in_csv = get_csv(inOrder)
+        return f'{pre_csv}{self.delimiter}{in_csv}'
 
-        return ",".join(res)
-
-
-    def exploreInOrder(self, root, arr):
+    def explore_preorder(self, root, arr):
         if not root:
             return
         
-        self.exploreInOrder(root.left, arr)
         arr.append(root.val)
-        self.exploreInOrder(root.right, arr)
-
-    def explorePreOrder(self, root, arr):
-        if not root: return
-
+        self.explore_preorder(root.left, arr)
+        self.explore_preorder(root.right, arr)
+        
+        
+    def explore_inorder(self, root, arr):
+        if not root:
+            return
+        
+        self.explore_inorder(root.left, arr)
         arr.append(root.val)
-        self.explorePreOrder(root.left, arr)
-        self.explorePreOrder(root.right, arr)
+        self.explore_inorder(root.right, arr)
         
 
-    def deserialize(self, data):
-        preorder = []
-        inorder = []
-
-        for item in data.split(","):
-            preNode, inNode = item.split("-")
-            preorder.append(int(preNode))
-            inorder.append(int(inNode))
-
-        return self.buildTree(preorder, inorder)
+    def deserialize(self, data) -> TreeNode:
+        pre_csv, in_csv = data.split(self.delimiter)
+        
+        comma = ','
+        get_arr = lambda arr: [int(ch) for ch in arr.split(comma)]
+        
+        preorder = get_arr(pre_csv)
+        inorder = get_arr(in_csv)
+        in_map = {n: idx for idx, n in enumerate(inorder)}
+        
+        # print(in_map)
+            
+            
+        return self.buildTree(preorder, inorder, in_map)
     
-    # TODO, build binary tree from preorder and inorder lists
-    def buildTree(self, preorder, inorder):
-        if not preorder: # TODO this might be a string
+    # TODO the `in_map` solution only works if the node values are unique
+    # how would you handle similar node values
+    def buildTree(self, preorder, inorder, in_map):
+        if not preorder:
             return None
-
-        in_map = { n: idx for idx, n in enumerate(inorder) }
-
-        root = Node(preorder[0])
         
-        parent = root
-        dim = len(preorder)
-        for idx in range(1, dim):
-            pass
-            n = preorder[idx]
-            parent_idx = in_map[parent.val]
-            if idx < parent_idx:
-                parent.left = self.buildTree(
-                    preorder[idx:],
-                    inorder[
-                        in_map[n] + 1 : parent_idx
-                    ]
-                )
-                
+        root = TreeNode(preorder[0])
+        
+        root_inorder_idx = in_map[root.val]
+        end_range = root_inorder_idx + 1
+        
+        # left branch
+        leftBranch = self.buildTree(
+            preorder[1:end_range],
+            inorder[:root_inorder_idx],
+            in_map,
+        )
+        
+        rightBranch = self.buildTree(
+            preorder[end_range:],
+            inorder[end_range:],
+            in_map,
+        )
+        
+        root.left = leftBranch
+        root.right = rightBranch
+        
         return root
-            
-            
-            
+        
+        
+        
 
-
-three = Node(3)
-nine = Node(9)
-twenty = Node(20)
-fifteen = Node(15)
-seven = Node(7)
+three = TreeNode(3)
+nine = TreeNode(9)
+twenty = TreeNode(20)
+fifteen = TreeNode(15)
+seven = TreeNode(7)
 
 twenty.left = fifteen
 twenty.right = seven
@@ -102,9 +117,6 @@ three.right = twenty
 
 
 sol = Codec()
-# sol.serialize(three)
-# TODO test the recursive tree building
-sol.buildTree(
-    [3,9,20,15,7],
-    [9,3,15,20,7]
-)
+res = sol.serialize(three)
+sol.deserialize(res)
+# print(res)
