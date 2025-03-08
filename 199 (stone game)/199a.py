@@ -54,6 +54,7 @@ class Solution:
 arr = [
     [5,3,4,5],
     [3,7,2,3],
+    [3,2,10,4],
 ]
 foo = arr[-1]
 sol = Solution()

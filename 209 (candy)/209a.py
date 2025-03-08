@@ -6,19 +6,21 @@ class Solution:
         pass
         # figure out which indexes need more candy than their neighbour
         # create an array of size `n` to store these
-        
-        # if `rating[idx]` is greater than `rating[idx-1]` and `rating[idx+1]`
-        
+                
         # there are two types of indices
         # one where it's greater than it's left and right
         # another where it's only greater than left OR greater than right
         
-        
-        # for the single sided indices, increment by `1`
-        # for the double sided, i.e. it's greater than it's left and right
-        # note the index
+        # there are two types of values
+        # type 1 values are only greater than their left or greater than their right
+        # type 2 values are greater than both their left value and their right value
+                
+        # for the type 1 values, increment by `1`
+        # for the type 2 values, note the index
                 
         dim = len(ratings)
+        
+        # minimum candy for each child
         arr = [0 for _ in range(dim)]
         
         both_sides = []
@@ -30,9 +32,12 @@ class Solution:
             
             sides = 0
             # if prevRating is a number and that number is less than currRating
+            # it means this value should have more candy than it's neighbour
             if isinstance(prevRating, int) and currRating > prevRating:
                 sides += 1
 
+            # if nextRating is a number and that number is less than currRating
+            # it means this child should have more candy than it's neighbour
             if isinstance(nextRating, int) and currRating > nextRating:
                 sides += 1
                 

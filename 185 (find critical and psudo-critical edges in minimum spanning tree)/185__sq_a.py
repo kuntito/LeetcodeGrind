@@ -9,7 +9,6 @@ class Solution:
     
         # create a weighted graph for all the points
         graph = self.create_graph(points)
-        print(graph)
         
         # find the MST for all points
         seen = set()
@@ -23,8 +22,16 @@ class Solution:
         while len(seen) < dim:
             pass
             dist, pt = heapq.heappop(minHeap)
-            # TODO continue from here
+            if pt in seen: continue
+            
+            seen.add(pt)
+            res += dist
+            
+            for neiPt, neiDist in graph[pt]:
+                nei = (neiDist, neiPt)
+                heapq.heappush(minHeap, nei)
         
+        return res
         
     def create_graph(self, points):
         graph = {}
@@ -57,9 +64,11 @@ class Solution:
 
 
 arr = [
-    [[0,0],[2,2],[3,10],[5,2],[7,0]],
     [[0,0],[2, 2]],
+    [[0,0],[2,2],[3,10],[5,2],[7,0]],
+    [[3,12],[-2,5],[-4,1]],
 ]
 foo = arr[-1]
 sol = Solution()
 res = sol.minCostConnectPoints(foo)
+print(res)

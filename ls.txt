@@ -1,8 +1,9 @@
-matchsticks to a square
-
+candy
 
 view solutions:
+    find all numbers disappeared in an array
+    binary subarrays with sum
+    matchsticks to square
+    stone game
     last stone weight ii
     search in rotated sorted array
-    reverse words in a string
-    binary subarrays with sum
