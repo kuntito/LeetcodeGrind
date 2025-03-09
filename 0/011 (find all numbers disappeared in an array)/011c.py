@@ -1,7 +1,5 @@
 # https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/
 
-# TODO https://neetcode.io/solutions/find-all-numbers-disappeared-in-an-array
-# deep navdeep's solution
 class Solution:
     def findDisappearedNumbers(self, nums: list[int]) -> list[int]:
 

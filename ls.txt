@@ -1,7 +1,6 @@
-candy
+bitwise AND of numbers range
 
 view solutions:
-    find all numbers disappeared in an array
     binary subarrays with sum
     matchsticks to square
     stone game
