@@ -1,27 +1,58 @@
 # https://leetcode.com/problems/partition-to-k-equal-sum-subsets/description/
 
 # TODO https://neetcode.io/solutions/partition-to-k-equal-sum-subsets
-# look at solution
 class Solution:
     def canPartitionKSubsets(self, nums: list[int], k: int) -> bool:
         pass
-        # at the very least, equalSum >= max(nums)
-        nums.sort()
-        print(nums)
+        # backtracking problem where we try all the possible combinations
+        # you keep adding numbers until the subarray sum becomes greater than `target`
+        # or the remainder
         
-        # total = sum(nums)
-        # at the very most, equalSum <= total/k
-        # if total % 2: return False
+        # `target` is `total of nums / k`
+        # if it `target` is odd, return False
         
-        # if you take the largest out
-        # is there enough elements to form `k-1` subsets
-        # if yes, two pointers
-        # compare
+        total = sum(nums)        
+        target, rem = divmod(total, k)
+        if rem:
+            return False
+        
+        # TODO i think the code could work without sorting
+        # but sorting might speed up the process
+        
+        # because if we add a number to the subarray and it exceeds `target`
+        # we know not to search further
+        # also, if any single number is greater than `target`
+        # return False
+        nums.sort(reverse=True)
+        
+        # create a bucket of size `k`
+        bucket = [0 for _ in range(k)]
+        
+        return self.explore(0, target, bucket, nums)
+        
+    def explore(self, idx, target, bucket, nums):
+        dim = len(nums)
+        
+        if idx == dim:
+            return True
+        
+        n = nums[idx]
+        dimTwo = len(bucket)
+        for j in range(dimTwo):
+            if bucket[j] + n <= target:
+                bucket[j] += n
+                if self.explore(idx + 1, target, bucket, nums):
+                    return True
+                bucket[j] -= n
+        return False
+
         
 arr = [
-    [[4,3,2,3,5,2,1], 4],
+    [[5, 4, 3, 3, 2, 2, 1], 4],
+    [[1,2,3,4], 3],
 ]
 
 foo, bar = arr[-1]
 sol = Solution()
 res = sol.canPartitionKSubsets(foo, bar)
+print(res)

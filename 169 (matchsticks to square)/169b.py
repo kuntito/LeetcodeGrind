@@ -15,6 +15,10 @@ class Solution:
             if i == len(matchsticks):
                 return True
             
+            # it's trying to place the ith matchstick at every side of the square
+            # where it fits
+            # if it finds a fit, it tries to place the next match
+            # ....
             for j in range(4):
                 if sides[j] + matchsticks[i] <= length:
                     sides[j] += matchsticks[i]

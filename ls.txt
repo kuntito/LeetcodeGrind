@@ -1,3 +1,18 @@
+maximum path sums
+single threaded CPU
+
+
+
+
+Common Interview Questions: (Note: Most solutions available online are comprehensive, but interviews typically ask simpler version of it)
+
+Design a Package Delivery System
+Design a Hotel Booking System
+Design GoodReads
+Implement the Linux find Command
+Design a Chess Game
+
+
 bitwise AND of numbers range
 
 view solutions:
