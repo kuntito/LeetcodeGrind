@@ -1,6 +1,9 @@
+how to balance bst
+
 maximum path sums
 single threaded CPU
 LFU
+min adjacent swaps to make a valid array
 
 
 
