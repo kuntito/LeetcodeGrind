@@ -74,6 +74,11 @@ class Codec:
     
     # TODO the `in_map` solution only works if the node values are unique
     # how would you handle similar node values
+    # when grabbing the preorder and inorder array
+    # find a way to note unique values
+    # such that every value is appended by `-n` wherer `n` is the count of that number in the tree
+    # i.e. ["3-1", "7-1", "7-2"]
+    # this way, all numbers can become unique
     def buildTree(self, preorder, inorder, in_map):
         if not preorder:
             return None
