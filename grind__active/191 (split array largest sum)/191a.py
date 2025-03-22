@@ -3,8 +3,38 @@
 class Solution:
     def splitArray(self, nums: list[int], k: int) -> int:
         pass
-        nums.sort()
-        print(nums)
+        # you want to divide `nums` into `k` separate chunks such that
+        # the `targetChunk` has a sum greater than  or equal to all the other chunks
+        # several `targetChunks` could exist, but we want to return the
+        # one with the smallest sum
+        
+        # i.e. [3, 2, 1], if `k` was `2`
+        # we could have target chunks [3], [3, 2], [2, 1] 
+        # in this case, the result would either be [3] or [2, 1]
+        # since they both have the smallest sums
+        
+        # if you could split into `k` subarrays
+        # how many different sub arrays could you have
+        # i'd say define the range for subarrays
+        # the minimum subarray is `1`
+        # the largest is going to be whatever's left of `dim`
+        # after you remove all the other sub arrays
+        # we'd assume every other chunk is of size `1`
+        # the largest len for a chunk would be whatever's left
+        # i.e. dim - (k-1)
+        
+        # explore all the ranges
+        # check if for each range, it's sum is the max sum seen
+        # if yes, append to an array, `candidateChunks`
+        # return min(candidateChunks)
+        
+        dim = len(nums)
+        # for the target chunk ranges
+        minLen = 1
+        maxLen = dim - (k-1)
+        
+        for size in range(minLen, maxLen + 1):
+            self.explore(nums, size)
     
 arr = [
     [[7,2,5,10,8], 2],
