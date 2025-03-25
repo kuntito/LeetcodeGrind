@@ -9,7 +9,8 @@ class Solution:
         # or the remainder
         
         # `target` is `total of nums / k`
-        # if it `target` is odd, return False
+        # if a remainder exists after `total of nums / k`
+        # return False
         
         total = sum(nums)        
         target, rem = divmod(total, k)
@@ -26,9 +27,12 @@ class Solution:
         nums.sort(reverse=True)
         
         # create a bucket of size `k`
-        bucket = [0 for _ in range(k)]
+        tray = [0 for _ in range(k)]
         
-        return self.explore(0, target, bucket, nums)
+        # i recursively add numbers to each bucket until the bucket is full
+        # the bucket total should never exceed target
+        
+        return self.explore(0, target, tray, nums)
         
     def explore(self, idx, target, bucket, nums):
         dim = len(nums)
@@ -38,6 +42,7 @@ class Solution:
         
         n = nums[idx]
         dimTwo = len(bucket)
+        # going through every hole in the tray
         for j in range(dimTwo):
             if bucket[j] + n <= target:
                 bucket[j] += n
@@ -50,6 +55,7 @@ class Solution:
 arr = [
     [[5, 4, 3, 3, 2, 2, 1], 4],
     [[1,2,3,4], 3],
+    [[4, 4, 4, 4], 4],
 ]
 
 foo, bar = arr[-1]
