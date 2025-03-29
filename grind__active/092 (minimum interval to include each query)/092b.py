@@ -10,14 +10,17 @@ class Solution:
         pass
         # sort the intervals
         intervals.sort()
+        
         # sort the queries
         sorted_queries = sorted(queries)
         
         minHeap = []
         res = {}
         
-        i = 0
+        i = 0 # this represents the index of the first interval
         for q in sorted_queries:
+            # while the interval idx is valid and the intervals left is 
+            # less than or equal to query, it means the query can exist in that interval
             while i < len(intervals) and intervals[i][0] <= q:
                 l, r = intervals[i]
                 heapq.heappush(minHeap, (r - l + 1, r))
