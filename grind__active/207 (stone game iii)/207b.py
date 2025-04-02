@@ -2,6 +2,7 @@
 
 # https://neetcode.io/solutions/stone-game-iii
 # 08:37
+# TODO how does this work?
 class Solution:
     def stoneGameIII(self, stoneValue: list[int]) -> str:
         pass
