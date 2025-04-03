@@ -6,7 +6,7 @@ class Solution:
     def splitArray(self, nums: list[int], k: int) -> int:
         pass
         # i'm considering a recursive backtracking solution
-        # where you explore every possible chunk
+        # where you explore every possible chunk combinations
         # `explore(nums, currIdx, kLeft)`
         # in each function you iterate through the number of chunks
         # from `1..when the remaining values in nums are less than kLeft`

@@ -4,7 +4,7 @@ class Solution:
     def splitArray(self, nums: list[int], k: int) -> int:
         pass
         # you want to divide `nums` into `k` separate chunks such that
-        # the `targetChunk` has a sum greater than  or equal to all the other chunks
+        # the `targetChunk` has a sum greater than or equal to all the other chunks
         # several `targetChunks` could exist, but we want to return the
         # one with the smallest sum
         
@@ -28,13 +28,45 @@ class Solution:
         # if yes, append to an array, `candidateChunks`
         # return min(candidateChunks)
         
-        dim = len(nums)
-        # for the target chunk ranges
-        minLen = 1
-        maxLen = dim - (k-1)
+        self.maxChunks = float("inf")
+        self.explore(nums, 0, k, [])
         
-        for size in range(minLen, maxLen + 1):
-            self.explore(nums, size)
+        return self.maxChunks
+    
+    def explore(self, nums, currIdx, chunksLeft, maxSoFar):
+        if chunksLeft == 1:
+            chunkSum = sum(nums[currIdx:])
+            if not maxSoFar or chunkSum > maxSoFar[-1][-1]:
+                self.maxChunks = min(
+                    self.maxChunks,
+                    chunkSum
+                )
+            else:
+                self.maxChunks = min(
+                    self.maxChunks,
+                    maxSoFar[-1][-1]
+                )
+            
+            return
+        
+        dim = len(nums)
+        endRange = dim - (chunksLeft - 1)
+    
+        for idx in range(currIdx, endRange):
+            chunk = nums[currIdx: idx + 1]
+            chunkSum = sum(chunk)
+            
+            pos = (currIdx, idx + 1)
+            
+            if not maxSoFar or chunkSum > maxSoFar[-1][-1]:
+                maxSoFar.append((pos, chunkSum))
+                
+            # grab a chunk from the next position
+            self.explore(nums, idx + 1, chunksLeft - 1, maxSoFar)
+            
+            # print(currIdx, idx, chunkSum)
+            while maxSoFar and maxSoFar[-1][0][1] > idx:
+                maxSoFar.pop()
     
 arr = [
     [[7,2,5,10,8], 2],
@@ -42,3 +74,4 @@ arr = [
 foo, bar = arr[-1]
 sol = Solution()
 res = sol.splitArray(foo, bar)
+print(res)
