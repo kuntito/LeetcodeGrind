@@ -35,7 +35,9 @@ class Solution:
     
     def explore(self, nums, currIdx, chunksLeft, maxSoFar):
         if chunksLeft == 1:
+            # if at the last chunk, sum up the rest
             chunkSum = sum(nums[currIdx:])
+            
             if not maxSoFar or chunkSum > maxSoFar[-1][-1]:
                 self.maxChunks = min(
                     self.maxChunks,
@@ -50,6 +52,11 @@ class Solution:
             return
         
         dim = len(nums)
+        # since, we're exploring all possibilites
+        # we take 1, take 2, take 3...n
+        # but `n` should be minimized such that there are still enough values
+        # for the other chunks
+        # TODO what's going on here?
         endRange = dim - (chunksLeft - 1)
     
         for idx in range(currIdx, endRange):
