@@ -43,7 +43,6 @@ class Solution:
         return self.binSearchNeg(peak_idx + 1, dim-1, target)
         
     def findPeak(self, left, right):
-        pass
         while left <= right:
             mid = (left + right) // 2
             midValue = self.mountain.get(mid)
@@ -54,9 +53,9 @@ class Solution:
             if is_peak:
                 return mid
             elif leftValue < midValue < rightValue:
-                left += 1
+                left = mid + 1
             else:
-                right -= 1
+                right = mid - 1
                 
         return -1
     
@@ -90,9 +89,9 @@ class Solution:
                 
         
 arr = [
-    [[1,2,3,4,5,3,1], 3],
     [[0,1,2,4,2,1], 3],
     [[0,5,3,1], 1],
+    [[1,2,3,4,5,3,1], 3],
 ]
 foo, bar = arr[-1]
 
@@ -100,3 +99,4 @@ mountain = MountainArray(foo)
 sol = Solution()
 res = sol.findInMountainArray(bar, mountain)
 print(res)
+
