@@ -26,7 +26,6 @@ class Solution:
             # move `left` forward removing every character from `count` and updating the window
             # do this until the match no longer exists
             while (t_count & count) == t_count:
-                print('cheers')
                 res = self.update_res(left, right, res)
                 count[s[left]] -= 1
                 left += 1

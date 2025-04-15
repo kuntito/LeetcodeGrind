@@ -33,7 +33,6 @@ class Solution:
             # when `matches == len(counter)`
             # the window is valid, store the `result`
             if matches == need:
-                pass
                 if res is None:
                     res = [left, idx + 1]
                 
