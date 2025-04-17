@@ -10,22 +10,22 @@ class Solution:
         
         memo = {}
         
-        def dfs(i, j):
-            foo = (i, j)
+        def dfs(uno, dos):
+            foo = (uno, dos)
             
-            if j == len(t):
+            if dos == len(t):
                 return 1
-            if i == len(s):
+            if uno == len(s):
                 return 0
             if foo in memo:
                 return memo[foo]
             
             # skip the current char at `i`
-            res = dfs(i + 1, j)
+            res = dfs(uno + 1, dos)
             
             # only continue if the chars are equal
-            if s[i] == t[j]:
-                res += dfs(i + 1, j + 1)
+            if s[uno] == t[dos]:
+                res += dfs(uno + 1, dos + 1)
                 
             memo[foo] = res
             return res
