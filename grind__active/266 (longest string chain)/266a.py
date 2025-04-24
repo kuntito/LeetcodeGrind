@@ -6,7 +6,7 @@ from collections import defaultdict
 class Solution:
     def longestStrChain(self, words: list[str]) -> int:
         pass
-        # for each word, we want to know every word with which it differs by `1` character and the order is maintained
+        # for each word, we want to know every word with which it differs by one character and their relative order is maintained
 
         # then we want to know the longest chain
         # for one, the words in the chain would differ by one character
