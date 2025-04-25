@@ -99,14 +99,6 @@ class Solution:
                 graph[leftWord].append(w)
 
     def ifOrderSame(self, wordOne, wordTwo):
-        # wordTwo is longer than wordOne
-        # set two indices, `uno` and `dos`
-
-        # move them both at the same time
-        # at some point, i expect their values to be different
-        # that would represent the omission
-        # but the omission should not happen more than once
-
         count = 0
         for idx, ch in enumerate(wordOne):
             if ch != wordTwo[idx + count]:
