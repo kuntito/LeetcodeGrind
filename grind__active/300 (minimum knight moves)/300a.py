@@ -1,6 +1,11 @@
 # https://leetcode.com/problems/minimum-knight-moves/description/
 
 # TODO, the problem here is a max recursion exceeded, of the eight paths, some paths would never lead to the the destination, how do we avoid going there?
+
+# i think a bfs solves this problem, since we explore all layers at once
+# we never have to go too deep to realize the error of our ways
+
+# how do i know what paths would not lead to the destination?
 class Solution:
     def minKnightMoves(self, x: int, y: int) -> int:
         pass
