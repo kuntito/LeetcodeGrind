@@ -49,25 +49,76 @@
 # this way, creating a new path would mean we check for all the parent nodes and keep traversing till we hit the last node, at which point we simply create the leaf node and assign it a value
 
 # so we need a node class
-# it should have 
+# it should have
 # value: int
 # path: str
 # children: Node[]
 
-from typing import List
-
 
 class Node:
-    def __init__(path: str, value: int, children: List[Node]) -> None:
-        pass
+    def __init__(self, path: str, value: int, children) -> None:
+        self.path = path
+        self.value = value
+        self.children = {}
+
 
 class FileSystem:
     def __init__(self):
         pass
+        # we would need a root node to hold all the root parents
+        self.root(path="root", value=None)
+
+        # this is the root from which all other paths stem from
 
     def createPath(self, path: str, value: int) -> bool:
         pass
+        # once we have a path, we'd split it into tokens
+        # a token is the string after the forward slash
+
+        # but we also need to know if a string is valid
+        # an empty string "" and "/" are not
+        # we can do a simple check for this
+        fwdSlash = "/"
+
+        if path == "" or path == fwdSlash:
+            return False
+
+        # now, we have our tokens
+        # we want to traverse from the first to last token and place it appropriately in `self.root`
+        tokens = path.split(fwdSlash)
+
+        # we want to place the token at index `0`
+        # in root.children if it doesn't exist
+        # if it does, we simply grab it and the next token i.e. index=1
+
+        # we also want to ensure that the current index is not the last index
+        # we also want to ensure that every parent of the leaf path exists
+        # but what would that mean though
+
+        # a -> b -> c
+        self.placeTokens(0, tokens, value, self.root.children)
+
+        # i think the idea here is that we only want to add the last path
+        # in /a/b/c
+
+        # when we call create path, we only want to create /c
+        # so if /a or /b do not exist, return False
+
+        # so technically the current token should always exist in root.children
+        # else return False
+        # the only time it's acceptable to not exist
+        # the only time it's permissible to not exist
+        # however, when idx == len(tokens) - 1
+        # then we should create the new node and return False
+
+    def placeTokens(self, idx, tokens, value, children):
+        if idx == len(tokens) - 1:
+            node = Node(
+                path=tokens[idx],
+                value=value,
+            )
+            return
+        
 
     def get(self, path: str) -> int:
-        pass        
-
+        pass
