@@ -80,7 +80,6 @@ class Solution:
         if pattern == "" or chars == "":
             return False
 
-
         firstPat = pattern[0]
         # now we explore pairing pattern[0]
         # with `n` first characters in `chars`
