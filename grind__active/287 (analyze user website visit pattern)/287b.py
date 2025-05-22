@@ -28,6 +28,7 @@
 # let's take it one step at a time. for each user, we need to know what websites they visited, are the timestamps in sorted order?? let's assume they are
 from collections import defaultdict
 
+
 # TODO, perhaps i don't understand the question but i'm close
 class Solution:
     def mostVisitedPattern(
@@ -47,6 +48,7 @@ class Solution:
         for _, user, site in combined:
 
             userAndWebsites[user].append(site)
+        
 
         # we'd use a default dict to store the unique patterns and the number of times they appeared
         patterns = defaultdict(int)
@@ -69,7 +71,8 @@ class Solution:
         #     print(f'{pat} => {score}')
 
         x = sorted(patterns.items(), key=lambda i: (-i[1], i[0]))
-        print(x)
+        for foo in x:
+            print(foo)
 
         return x[0][0].split("-")
 
