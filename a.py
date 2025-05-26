@@ -1,20 +1,13 @@
-chars = "abbc"
+arr = [
+    ["Year:Month:Day:Hour:Minute:Second", "2016:01:01:01:01:01", "2017:01:01:23:00:00"]
+]
 
-res = []
+split_cols = lambda x: x.split(":")
 
-idx = 0
-count = 1
-while idx < len(chars):
-    ch = chars[idx]
-    if not res or ch != res[-1]:
-        res.append(ch)
-        
-    if idx + 1 == len(chars) or ch != chars[idx + 1]:
-        res.append(str(count))
-        count = 0
-    count += 1
-    idx += 1
-    
-x = "".join(res)
-print(x)
-    
+for zero, one, two in arr:
+    lst_zero = split_cols(zero)
+    lst_one = split_cols(one)
+    lst_two = split_cols(two)
+
+    for z, a, b in zip(lst_zero, lst_one, lst_two):
+        print(f"{z} {a} {b}")
