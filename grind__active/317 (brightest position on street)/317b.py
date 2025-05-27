@@ -24,7 +24,9 @@ class Solution:
         mostLit = None
         posMap = defaultdict(int)
         prevEnd = None
-        for start, end in intervals:
+        for idx, x in enumerate(intervals):
+            start, end = x
+            
             posMap[start] += 1
             
             if prevEnd and start <= prevEnd:
@@ -34,6 +36,12 @@ class Solution:
                 mostLit = start
             elif posMap[start] > posMap[mostLit]:
                 mostLit = start
+                
+            if idx + 1 < len(intervals) and end >= intervals[idx + 1][0]:
+                posMap[end] += 1
+                
+            if posMap[end] > posMap[mostLit]:
+                mostLit = end
                 
             prevEnd = end
             
