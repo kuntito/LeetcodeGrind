@@ -1,13 +1,27 @@
-arr = [
-    ["Year:Month:Day:Hour:Minute:Second", "2016:01:01:01:01:01", "2017:01:01:23:00:00"]
-]
+lines = """so good they can't ignore you (61)
+how to win friends and influence others (29)
+the art of explanation (76/102)
+slow productivity (81)
+atomic habits (118)
+thank you for arguing (79)
+how to talk to anyone (34)
+the status game (33)
+friends (51)
+elements of eloquence (119)
+autism (60)
+value of others (231)
+supercommunicators (110)
+how to know a person (15)
+persuasion (52)
+33 strategies of war (95)
+master storytelling (108)
+ultralearning (201)
+mastering the art of bullshit (135)
+principles (93)
+the science of story telling (152)""".split("\n")
 
-split_cols = lambda x: x.split(":")
-
-for zero, one, two in arr:
-    lst_zero = split_cols(zero)
-    lst_one = split_cols(one)
-    lst_two = split_cols(two)
-
-    for z, a, b in zip(lst_zero, lst_one, lst_two):
-        print(f"{z} {a} {b}")
+for x in lines:
+    book, number = x.split(' (')
+    number = number.strip(')')
+    
+    print(number)
