@@ -38,9 +38,102 @@
 
 # the first multiplication expression would be 2*3
 # if i replaced this with `6`
+# the expression becomes 6*5
+# then i'd handle this, it becomes `30`
 
+# i get the gist but how do i structure it in code?
+# off the dome, i'm thinking doubly linked list.
 
+# i'd divide the string into tokens
+# each token represents a linked list node
+# and the value of each node can either be a number
+# or an operator
+# how bout parentheses?
+
+# i guess, those could be tokens too
+# say you've tokenized the string, what next?
+
+# address the first operations
+# scanning through the string, you want to find the first set of parentheses
+# if there are none, you want to find the first set of multiply operators
+# if there are none, the first set of additions
+# if there are none, the first of subtractions
+# if there are none, you're probably at the end.
+
+# there a way to keep track of which operators?
+# i mean once i scan through the operators, i want to know the operator to address first
+# the arithmetic operators are the easiest
+# i'd have a variable and a list of nodes
+# i'd have a hashmap, with "+", "-" and "*"
+# where the values are a list
+
+# every operator node get's appended to the list
+# this way i can address every multiplication first before dealing with others
+# since i use a double linked list i can simply replace the expression with it's result
+# in O(1) time and since, i've store the operators as linked list nodes
+# i can get the left and right side in O(1) time
+# the problem here, would be parentheses?
+
+# how do i address that?
+# for one, i want to address the deepest parentheses first.
+# that's the first parenthesis to close.
+# i can keep track of all the opens
+# the moment i close one, i know i'm at the ending.
+
+# that way i can address that expression first
+# but how would this fit in to the linked list node narrative
+
+# i get it, it'd be a recursive approach.
+# a function that attempts to tokenize a string,
+# the function does it's thing and tracks any open parentheses it finds
+# the moment it finds a closing parentheses
+
+# it takes all the characters in between
+# and solves for that expression
+# this is some messy reasoning.
+
+# how do i approach this?
+# say brute force, the only problem with my tokenizing approach is parentheses
+# perhaps i'd address all the parentheses first.
 
 class Solution:
     def calculate(self, s: str) -> int:
         pass
+    
+        # the idea here is to eliminate parentheses
+        # i'd track the indices of all the opens
+        # when i find a close, i'd have a range of characters
+        # without parentheses, i'd solve the expression(s)
+        # then what?
+        # this is the tricky bit, what if i converted all the characters to a string first?
+        # or technically the tokens thing could still work
+        # rather than storing indices, i'd store the nodes
+        # this way, knowing the opening parenthesis node and the closing, i can solve for what's in between
+        # and replace with the result in O(1) time
+        
+        # this way i can address all the parentheses in one swoop
+        # once done i'd run through the list again
+        # do the hashmap thing for each arithmetic operator and voila, problem solved
+
+        # first, i need a linked list node class
+        
+class Node:
+    def __init__(self, val, left=None, right=None) -> None:
+        self.val = val
+        self.left = left
+        self.right = right
+        
+    def connectNeighbours(self):
+        pass
+        
+class LinkedList:
+    def __init__(self) -> None:
+        self.head = Node("head")
+        self.tail = Node("tail")
+        
+        self.head.right = self.tail
+        self.tail.left = self.head
+        
+    def addNode(self):
+        pass
+    
