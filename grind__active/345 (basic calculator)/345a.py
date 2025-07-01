@@ -116,6 +116,7 @@ class Solution:
         # do the hashmap thing for each arithmetic operator and voila, problem solved
 
         # first, i need a linked list node class
+        # then i need to 
         
 class Node:
     def __init__(self, val, left=None, right=None) -> None:
@@ -124,7 +125,14 @@ class Node:
         self.right = right
         
     def connectNeighbours(self):
-        pass
+        left = self.left if self else None
+        right = self.right if self else None
+        
+        if left:
+            left.next = right
+        
+        if right:
+            right.prev = left
         
 class LinkedList:
     def __init__(self) -> None:
@@ -134,6 +142,9 @@ class LinkedList:
         self.head.right = self.tail
         self.tail.left = self.head
         
-    def addNode(self):
-        pass
+    def addNode(self, node):
+        self.tail.next = node
+        node.prev = self.tail
+        
+        self.tail = node
     
