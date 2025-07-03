@@ -11,7 +11,7 @@
 
 # my job is to solve this expression and return the result
 
-# how do i approach this
+# how do iapproach this joint?
 # the way i see it, the smallest arithmetic expression has three parts.
 # left operand, operator and right operand
 
@@ -116,7 +116,38 @@ class Solution:
         # do the hashmap thing for each arithmetic operator and voila, problem solved
 
         # first, i need a linked list node class
-        # then i need to 
+        # then i need an array to track all the opening nodes
+        
+        opens = []
+        # now, i blaze through `s`
+        # ignoring any spaces, since spaces are not part of the equation
+        # however, how do i address negative numbers
+        # i'm guaranteed there'd be no consecutive operators
+        
+        # therefore, `-` can only appear in front of another number or an open parenthesis.
+        
+        # how do i differentiate the two 3s
+        # `-3 + 2` from `1-3+2`
+        
+        # think it's what comes before the minus sign
+        # if there's nothing before the minus sign
+        # then the minus sign is part of the number
+        # else, the minus sign is an operator
+        
+        # think i can proceed
+        space = ' '
+        minus = '-'
+        plus = '+'
+
+        dim = len(s)
+        while idx < dim:
+            ch = s[idx]
+            
+            if ch == minus and idx == 0:
+                # this is the unary operator
+                # at this point i want to take all the digits after
+            
+            idx += 1
         
 class Node:
     def __init__(self, val, left=None, right=None) -> None:
