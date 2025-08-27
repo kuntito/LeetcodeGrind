@@ -6,7 +6,7 @@ from typing import List
 # this functions takes one argument, a 2d array of strings
 # and returns an integer
 
-# each string in the 2d array is either a "0" or a "1"
+# within the 2d array, each string is either a "0" or a "1"
 # my job is to find the largest rectangle containing only 1's and return it's area
 
 # how do i achieve this?
