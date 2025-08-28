@@ -36,6 +36,8 @@
 # inside a string, a sequence is set of characters that follow each other
 # but not necessarily after one another
 
+# so how do i find the longest common sequence between two strings
+
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         pass
