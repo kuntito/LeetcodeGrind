@@ -157,8 +157,8 @@ class Solution:
             if newInterval[1] < inval[0]:
                 res.append(newInterval)
                 
-                # i want to append the slice..
-                res.extend(intervals[idx + 1:])
+                # i want to append the slice from this index onwards..
+                res.extend(intervals[idx:])
                 return res
             
             is_merge, newInterval = self.is_overlap(inval, newInterval)
@@ -195,6 +195,7 @@ class Solution:
 arr = [
     [[[1,3],[6,9]], [2, 5]],
     [[[1,2],[3,5],[6,7],[8,10],[12,16]], [4, 8]],
+    [[[1,5]], [0, 0]]
 ]
 foo, bar = arr[-1]
 sol = Solution()
