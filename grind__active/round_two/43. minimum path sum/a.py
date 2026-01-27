@@ -101,6 +101,26 @@ import heapq
 # but when would they be different?
 # the failing test case is long, wonder if i can simplify it.
 # [[1,4,8,6,2,2,1,7],[4,7,3,1,4,5,5,1],[8,8,2,1,1,8,0,1],[8,9,2,9,8,0,8,9],[5,7,5,7,1,8,5,5],[7,0,9,4,5,6,5,6],[4,9,9,7,9,1,9,0]]
+
+# without exploring the test case, i think i have the intuition from another question, `networkDelay`
+# what you should store in the heap is the pathSum it takes to reach the current node.. not the value
+# of the node itself..
+
+# you can end up at the same node with different lengths..
+# say:
+# path1 => 6 => 4 => (2)
+# path2 => 3 => 2 => (3)
+
+# say both (2) and (3) can help us get to destination with the same sum onwards..
+# with the way the algo is currently written, we'd prefer to explore (2)
+# since the value is smaller, but we don't just care about the immediate next smaller value
+# we care about it's history..
+
+# getting to `2` requires 6 + 4 + 2 = 12
+# getting to `3`, requires 3 + 2 + 3 = 8
+
+# got it.. let me rewrite..
+
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
         
