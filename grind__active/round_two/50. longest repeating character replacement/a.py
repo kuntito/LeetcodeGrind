@@ -69,6 +69,8 @@
 # it's undeniably efficient but it's a start.
 
 # ok.. it works but TLE.. so now, we optimize..
+
+
 # what's the repeated work..
 # i peeped the solution and now have an intuition, on to `b.py`
 
