@@ -106,8 +106,27 @@ class ListNode:
 # i better look at that..
 
 # interviewers might frown against me using a deque..
-# TODO deep neet's solution.. 03:19
-# https://www.youtube.com/watch?v=S5bfdUTrKLM
+# what he did was have reverse the second half of the list..
+
+# you start off with:
+# 1 => 2 => 3 => 4
+
+# and how does reversing help you
+# 1 => 2 => 3 <= 4
+
+# well i imagine, 
+# you'd be at `4` after reversing
+
+# since you always know the start of the list as `1`
+# you can simply connect `1` to `4`
+# then proceed to the next nodes..
+
+# the reversal helps you know the next last node to address..
+# so how do we reverse the second half..
+
+# 
+
+
 
 from collections import deque
 
