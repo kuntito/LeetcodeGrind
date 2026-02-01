@@ -146,6 +146,7 @@ class Solution:
         
         graph = self.getGraph(n, times)
         
+        res = 0
         while minHeap:
             currentDur = minHeap[0][0]
             
@@ -157,6 +158,9 @@ class Solution:
 
                 layer.append(layerNode)
                 seen.add(layerNode)
+
+            if layer:
+                res = currentDur
                 
             # now, we want to explore the neighbours of each layer node
             # need the graph..
@@ -180,7 +184,37 @@ class Solution:
                             neiDest,
                         )
                     )
-        return currentDur if len(seen) == n else -1
+        return res if len(seen) == n else -1
+            
+            
+    def getGraph(self, nodeCount, edges):
+        # how we doing this?
+        # key, value pair
+        graph = {}
+        
+        # key is startNode
+        # value is [destNode, duration]
+        
+        # need to add all nodes into graph with an empty value pair
+        # in case there's disconnected nodes..
+        
+        # if there was, you wouldn't touch it.. would you..
+        # how so.. you only explore graph, if it's a neighbour..
+        # yes, it can be a neighbour and not point to anything..
+        
+        # unless i want to do `if nei in graph` first..
+        # then it makes sense to add all nodes from the jump..
+        # aii..
+        
+        for n in range(1, nodeCount + 1):
+            graph[n] = []
+        
+        for startNode, destNode, duration in edges:
+            graph[startNode].append(
+                [destNode, duration]
+            )
+            
+        return graph
             
             
     def getGraph(self, nodeCount, edges):
