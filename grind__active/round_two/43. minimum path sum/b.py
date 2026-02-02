@@ -64,15 +64,25 @@ from typing import List
 # error, didn't append tuple of [pathSum, neiPos] to minHeap, only appended `pathSum`
 # error, the first entry is not `[0, topLeftPos]`, `[topLeftValue, topLeftPos]`
 
-# and apparently, the grid can be empty, in which case, base case, return 0
-
 # error, something caused TLE.. find it..
+
+# i think i see the point.
+
+# 1 -> 2 -> 34
+# 3 -> 2 -> 1
+
+# my argument for not adding seen was for the example above. you could see the same cell 2, twice but the first path can lead to a greater sum down the line, so you go back to the next best path.
+
+# what i didn't notice is from 2 if you could get to 1, from 3 -> 2 -> 1, you could also get to 1 from 1 -> 2 -> 34
+
+# they all stem from 2, so the first time you see a cell is the best way to get to it, if it tanks, it means there's no better way to do it than what you've tried.
+
+# TODO, it works now, but there's a more optimal solution
+# see `https://www.youtube.com/watch?v=pGMsrvt0fpk`
 import heapq
 
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
-        if not grid:
-            return 0
         
         topLeftVal = grid[0][0]
         firstEntry = [topLeftVal, (0, 0)]
@@ -80,8 +90,14 @@ class Solution:
         
         rows, cols = len(grid), len(grid[0])
         destination = (rows-1, cols-1)
+        
+        seen = set()
         while True:
             curPathSum, curPos = heapq.heappop(minHeap)
+            
+            if curPos in seen:
+                continue
+            seen.add(curPos)
             
             if curPos == destination:
                 return curPathSum
@@ -114,6 +130,10 @@ class Solution:
     
 arr = [
     [[1,3,1],[1,5,1],[4,2,1]],
+    [
+        [1, 2, 3],
+        [4, 5, 6],
+    ]
 ]
 foo = arr[-1]
 sol = Solution()

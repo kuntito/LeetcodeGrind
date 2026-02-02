@@ -118,7 +118,18 @@ from typing import List
 
 # still don't work, figure it out
 # TODO [-2,4,-5,4,-5,9,4]
+# i understand why my idea fails.
+# i can't just go round the first negative, because it could be part of the best sum
 
+# consider the example.. [-2,4,-5,4,-5,9,4]
+# the best sum starts at the end of the array, `9`, `4` which is `13`
+# then circles round to `-2` becomes `11`
+# then proceeds to `4`, which becomes `15`
+# this is the highest sum throughout the array.
+
+# i simply can't go round the first negative.
+# what if i go round the greatest negative, why would you be doing that?
+# let's restart the process.
 
 class Solution:
     def maxSubarraySumCircular(self, nums: List[int]) -> int:
