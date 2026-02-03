@@ -102,8 +102,6 @@ from typing import List
 # the fix is to check if `idxOne < 0`
 # automatically add `nums2`s last element 
 
-# TODO view the official solution for this.
-
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
