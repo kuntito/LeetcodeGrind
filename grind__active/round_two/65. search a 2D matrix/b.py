@@ -56,6 +56,13 @@ from typing import List
     #     ],
     #     3,
     # ]
+    
+# error, the problem was the conditionals for the binary search
+# i'd swapped the pointer shifting for when the mid point value was
+# not equal to `target`
+
+# a calmer, more methodical approach to this
+# would've let me see clearer.
 
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
@@ -71,10 +78,10 @@ class Solution:
             
             if val == target:
                 return True
-            elif val > target:
-                left = midPoint + 1
-            elif val < target:
+            elif target < val:
                 right = midPoint - 1
+            elif target > val:
+                left = midPoint + 1
                 
         return False
     
