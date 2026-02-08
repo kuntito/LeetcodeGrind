@@ -1,9 +1,5 @@
 # https://leetcode.com/problems/clone-graph/description/
-
-class Node:
-    def __init__(self, val = 0, neighbors = None):
-        self.val = val
-        self.neighbors = neighbors if neighbors is not None else []
+from createNodes import createNodes, Node
 
 from typing import Optional
 
@@ -76,16 +72,35 @@ class Solution:
         
         return cloneNode
     
-    def explore(self, node, cloneNode, seen):
-        seen[node] = cloneNode
+    def explore(self, ogNode, ogCloneNode, seen):
+        if ogNode in seen:
+            return
         
-        for neiNode in node.neighbors:
+        seen[ogNode] = ogCloneNode
+        
+        for neiNode in ogNode.neighbors:
             if neiNode in seen: 
-                neiClone = seen[neiNode]
+                neiCloneNode = seen[neiNode]
             else:         
-                neiClone = Node(neiNode.val)
+                neiCloneNode = Node(neiNode.val)
                 
-            cloneNode.neighbors.append(neiClone)
+            ogCloneNode.neighbors.append(neiCloneNode)
 
-            if neiNode not in seen:
-                self.explore(node, neiNode)
+            
+            self.explore(neiNode, neiCloneNode, seen)
+                
+arr = [
+    [
+        [2,4],
+        [1,3],
+        [2,4],
+        [1,3]
+    ],
+]
+edges = arr[-1]
+
+nodeGraph = createNodes(edges)
+nodeOne = nodeGraph[1]
+
+sol = Solution()
+sol.cloneGraph(nodeOne)
