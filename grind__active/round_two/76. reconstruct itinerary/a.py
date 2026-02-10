@@ -142,13 +142,19 @@ from typing import List
 # add a tracking array, `itinerary` that stores all visited destinations..
 # period..
 
+# TODO the code, Claude says is correct, but TLE
+# deep Hierholzer's algorithm and see neetcode's official solution.
+
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
         graph = self.getGraph(tickets)
         ticketMap = self.getTicketMap(tickets)
         
+        for k, v in graph.items():
+            print(k, '=>', v)
+        
         itinerary = []
-        self.explore("JFK", graph, itinerary, ticketMap)
+        # self.explore("JFK", graph, itinerary, ticketMap)
         return itinerary
     
     def getTicketMap(self, tickets):
