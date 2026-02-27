@@ -213,6 +213,15 @@ from typing import List
 
 # i can memoize on current index.
 
+# TODO rewrite from the base case up..
+# what happens, if you have one element in the array
+# what happens, if it's two..
+# what happens, if it's three..
+
+# any more than this is a repetition of the fundamental cases
+# you picked an example that allowed you stop exploring at the last three elements
+# since they were positive.
+
 # TODO is this the most optimal solution?
 class Solution:
     def stoneGameIII(self, stoneValue: List[int]) -> str:
