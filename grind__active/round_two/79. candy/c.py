@@ -35,3 +35,12 @@ class Solution:
 
         candyCount[idx] = curCount
             
+            
+arr = [
+    [1, 0, 2],
+]
+foo = arr[-1]
+sol = Solution()
+res = sol.candy(foo)
+print(res)
+            
