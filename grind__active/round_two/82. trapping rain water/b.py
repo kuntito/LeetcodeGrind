@@ -15,8 +15,19 @@ class Solution:
             rightTallest = rightMostCache[idx]
             
             smallerOne = min(leftTallest, rightTallest)
+            # the gist here is, at any point
+            # the most water you can trap
+            # is a function of the shorter between
+            # the tallest pillar to the left, and
+            # the tallest pillar to the right
+            # and you decrement the shorter one
+            # by `val`, the current value at that position.
             curSpace = smallerOne - val
             
+            # because, value at the current position
+            # could be taller than the shorter between left and right
+            # this could result in a negative
+            # after the deduction. hence, this.
             curSpace = max(0, curSpace)
             
             

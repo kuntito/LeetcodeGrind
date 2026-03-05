@@ -159,6 +159,9 @@ from typing import List
 # why did i miss it? how can i avoid it next time?
 
 # [1]
+# and [2, 1]
+
+# they seem to be different flavors of the same problem.
 
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
