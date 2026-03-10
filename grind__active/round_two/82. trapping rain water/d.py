@@ -42,6 +42,7 @@ from typing import List
 # Navdeep boasts of an O(1) space time and this is what i want to explore.
 
 # https://www.youtube.com/watch?v=ZI2z5pq0TqA
+# TODO 16:08 `you move the smaller one because you know there's something taller than it in front.`
 
 # i think i get the idea.
 # two pointers, `left` and `right`, starting at the extreme ends.
