@@ -1,0 +1,13 @@
+{
+  "workbench.colorTheme": "GitHub Dark Default",
+  "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "entity.other.inherited-class.sl", // for backticks
+                "settings": {
+                    "foreground": "#F1C066",
+                }
+            }
+        ]
+    }
+}
