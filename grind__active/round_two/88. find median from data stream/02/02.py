@@ -45,3 +45,4 @@ class MedianFinder:
         # you want [6, 5] and [8]
         
         # so how are you really adding new numbers?
+        pass
