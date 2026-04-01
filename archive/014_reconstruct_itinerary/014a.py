@@ -72,11 +72,11 @@ arr = [
         ["TIA","ADL"],
         ["TIA","AUA"],
     ],
-    # [
-    #     ["JFK","KUL"],
-    #     ["JFK","NRT"],
-    #     ["NRT","JFK"],
-    # ],
+    [
+        ["JFK","CAI"],
+        ["JFK","LDN"],
+        ["LDN","JFK"],
+    ],
     # [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]],
 ]
 
