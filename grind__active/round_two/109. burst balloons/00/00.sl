@@ -1,3 +1,5 @@
+https://leetcode.com/problems/burst-balloons/
+
 i'm given a list of numbers, `nums`
 
 i want to remove all the numbers from the list.
