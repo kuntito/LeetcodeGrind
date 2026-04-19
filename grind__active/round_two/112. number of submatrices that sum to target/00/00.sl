@@ -57,3 +57,12 @@ at what point does it end?
 well, it's when i'd have explored all the cells.
 
 # TODO finish this..
+
+a cell is a submatrix.
+
+other sub matrixes can emerge from that cell.
+they do so in three ways.
+
+* incrementing x2, moving rightwards
+* incrementing y2, moving downwards
+* incrementing both, x2 and y2, forming rightwards and downwards, forming a larger square.
