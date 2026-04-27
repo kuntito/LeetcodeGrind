@@ -93,4 +93,4 @@ well, we can store number of continuous before each gap and number of continuous
 so with each gap we fill, we can tell, how much groud we've covered.
 every gap we update should also update any gap neighbors it touches.
 
-for instance if i have 2..4.5
+for instance if i have 2..5.7
