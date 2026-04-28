@@ -1,5 +1,6 @@
 import heapq
 
+# TODO see if there's a cleaner solution.
 class FreqStack:
     def __init__(self):
         self.maxHeap = []
