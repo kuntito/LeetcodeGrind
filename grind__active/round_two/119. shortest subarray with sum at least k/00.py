@@ -14,7 +14,7 @@ class Solution:
             windowSum += n
             
             while (windowStartIdx < len(nums) and nums[windowStartIdx] < 0) or windowSum >= k:
-                if windowSum >= k:
+                if windowSum >= k:#
                     winLen = (idx - windowStartIdx) + 1
                     if shortestWinLen is None:
                         shortestWinLen = winLen
@@ -32,6 +32,7 @@ arr = [
     [[1], 1],
     # [[84,-37,32,40,95], 167],
     # [[1, 2, 2], 4],
+    [[45,95,97,-34,-42], 21],
 ]
 foo, bar = arr[-1]
 sol = Solution()
