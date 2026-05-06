@@ -1,6 +1,8 @@
-a = 2
-b = 5
+def rev(chars):
+    if not chars:
+        return ""
+    
+    return chars[-1] + rev(chars[:-1])
 
-a = b = 3
-
-print(b)
+x = rev("hello")
+print(x)
