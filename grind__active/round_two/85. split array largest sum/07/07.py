@@ -47,12 +47,6 @@ class Solution:
                     maxB
                 )
     
-    # i get a sense what the cache is doing, i still haven't deeped why
-    # it works? rather, why this structure works the way it does?
-    # is it the same thing i'm doing while recursing..
-    # go through every variation of a particular split sum
-    # for each variation, explore all the paths after it
-    # conclude on the smallest max and return that?
     def getSmallestMaxAlongAllPaths(self, nextStartIdx, splitsLeft, cache):
         numsLen = len(cache)
         
