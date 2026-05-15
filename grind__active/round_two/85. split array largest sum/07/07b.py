@@ -17,6 +17,9 @@ class Solution:
                 splitsLeft,
                 cache
             )
+        
+        for rw in cache:
+            print(rw)
 
         return cache[0][k]
 

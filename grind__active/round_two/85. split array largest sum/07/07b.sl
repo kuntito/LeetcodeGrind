@@ -112,3 +112,167 @@ at width (2, 3, 4, 5), you're comparing with the split1 sum that starts at index
 so the name `smallestMaxSumAlongRemainingPaths` might not be accurate.
 
 i'd have to investigate.
+
+with the way, this is written.
+
+it raises the question if the cache needs the shape it has.
+
+what's happening is we attend to each ordinal split in reverse.
+
+the first split has several variations, and so we store them all in cache.
+
+cache[i][1] = ?
+cache[i+1][1] = ?
+and as many more are needed.
+
+so every version of the first split now exists in cache.
+
+now, second split, we do the same.
+explore every variation.
+
+now, for each one we explore, we compare it with the split after it.
+the first split.
+
+we want to know which of them is bigger.
+
+whichever is bigger, we cache that at:
+
+cache[j][2] = the bigger one
+cache[j + 1][2] = the bigger one
+
+and so each position on the cache contains the max sum, along it's specific path?
+
+actually, no.
+the algo, does two things.
+
+still on the second split.
+first you compare the current split sum with the one that begins after it.
+
+in this case, the one for split 1.
+
+we determinew which is bigger.
+
+then cache, but the cache doesn't cache which is bigger.
+
+it caches, what's smaller between whatever already exists at the cache position
+and this bigger value from the earlier comparison.
+
+the cache positions are initialized to an inordinately high value, `float(inf)`
+and so...
+
+the smaller one ends up being the bigger number from the earlier comparison.
+
+not entirely sure, why the cache is initialized to `float(inf)` when we only ever compare a single path for each position.
+
+perhaps, for convenience?
+
+let's explore the iterations a little more.
+
+so, for the second split.
+after going through each width, what would the cache look like.
+
+well, since, the numbers are the rows, when you cache a result.
+you access the row where the current split starts, and find the specific split you want.
+
+so, if the first split accesses index 5, it'd store it's cache in the column idx 1.
+now, if the second split also accesses index 5, it'd store it's cache in the same row, but column 2.
+
+i don't see how a clash of positions occur.
+where you'd need to a min between values.
+
+but run the second split till then end.
+
+what'd happen is every position on column index 2,
+relevant to the second split's width is filled.
+
+can i see this in practice.
+
+i've seen how a clash would occur.
+
+thing is, when exploring the different paths on different split widths.
+you always cache on the starting point of split width.
+
+is akin to asking, if i split width 1, what's the best i can get.
+
+hold it.
+
+if i split width 2, what's the best i can get?
+if it's smaller than what i'm holding, hold that.
+
+if i split at width 3, what's the smallest i can get?
+if smaller than what i'm holding, hold that instead.
+
+in essence, i'd only ever need to store the starting point for all widths.
+to get the smallest max for any split.
+
+
+my statement about getting the range of each split (starIdx, endRange) is incomplete.
+
+what's happening is, for each split, we're determining the smallest max along all paths.
+
+[1, 2, 3, 4, 5] 
+
+way i thought about it was for split 2.
+in a 3-way split.
+
+i'd assume every split before and every split after was width 1.
+
+that way, the second split can be at most
+
+(2, 3, 4)
+
+then the iterations go from (2,) to (2, 3) to (2, 3, 4)
+which is valid.
+
+what i didn't consider was, the second split could also shrink.
+i've addressed every variation of the last split by expanding from
+(2,) to (2, 3, 4),
+
+however, the first split, starting at (1,)
+can also grow...
+
+and when it grows, it shrinks the second split/
+
+and so, the second split can actually be (3, 4) or (4,)
+
+this is the reason for the reverse iteration.
+by going backwards, you address the situations where the current split shrinks.
+once you reach the starting point, you address the situations where it expands.
+
+the concern would be the way it's written currently.
+there's some slight inefficiencies since the code iterates through the entire nums backwards
+
+then does so forwards till it hits the end range.
+
+so, it's
+you go to `5`, there's nothing much to explore..
+since the endRange is `5`
+
+you go to `4`
+you explore (4,) and what comes next.
+
+you go to `3`
+you explore (3,) and what comes next.
+you explore (3, 4,) and what comes next.
+
+you go to `2`
+you explore (2,) and what comes next.
+you explore (2, 3,) and what comes next.
+you explore (2, 3, 4,) and what comes next.
+
+and so.. you'd have explored every variation of the second split.
+
+when laid out.. it's
+(4,)
+(3,)
+(3, 4,)
+(2,)
+(2, 3,)
+(2, 3, 4)
+
+all valid splits.
+
+the density of logic is crazy.
+how was i post to see this from the jump?
+
+does Navdeep even know this is what it does?
