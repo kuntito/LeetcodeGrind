@@ -39,3 +39,5 @@ i'd say a max heap of size `k`
 
 this way the number at the top is always the kth smallest distance.
 
+TODO
+seems to work but TLE.
