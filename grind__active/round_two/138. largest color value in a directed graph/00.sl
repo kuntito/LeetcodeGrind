@@ -60,7 +60,7 @@ there are as many nodes as there are characters.
 
     the purpose of this writing is to reveal the problem.
 }
-https://leetcode.com/problems/largest-color-value-in-a-directed-graph/description/?__cf_chl_f_tk=bZLhYbDemIpQFrA.0mGRlNKXF2qTlQnhqzeNe8deomo-1783328381-1.0.1.1-TssZUUM1klT3xnRmxG6FGeQqU7KrFtKSJekpFlx0P2w
+
 `A valid path in the graph is a sequence of nodes x1 -> x2 -> x3 -> ... -> xk such that there is a directed edge from xi to xi+1 for every 1 <= i < k. The color value of the path is the number of nodes that are colored the most frequently occurring color along that path.`
 
 {
