@@ -29,7 +29,7 @@ the things i stored inside them i mean.
 the water.
 
 this is the simplest question in the world.
-they should fire the guy who said it hard.
+they should fire the guy who said it's hard.
 
 for each square, i can tell how much water it can store.
 by the squares around it.
