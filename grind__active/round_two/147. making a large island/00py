@@ -1,0 +1,95 @@
+from typing import List
+
+
+class Solution:
+    def largestIsland(
+        self,
+        grid: List[List[int]]
+    ) -> int:
+        self.grid = grid
+        self.rows, self.cols = len(self.grid), len(self.grid[0])
+        
+        largestFound = None
+        
+        for row in self.grid:
+            for idx, val in enumerate(row):
+                if val == 1: continue
+                
+                row[idx] = 1
+                resLargest = self.getLargest()
+                
+                if largestFound is None:
+                    largestFound = resLargest
+                else:
+                    largestFound = max(
+                        largestFound,
+                        resLargest
+                    )
+                
+                row[idx] = 0
+                
+        return self.getLargest() if largestFound is None else largestFound
+    
+    
+    def getLargest(self):
+        seen = set()
+        
+        largest = None
+        for ri, row in enumerate(self.grid):
+            for ci, val in enumerate(row):
+                pos = (ri, ci)
+                
+                if pos in seen: continue
+                resLargest = self.exploreLargest(pos, seen)
+                if largest is None:
+                    largest = resLargest
+                else:
+                    largest = max(
+                        largest,
+                        resLargest
+                    )
+                    
+        return largest
+                    
+                    
+    def exploreLargest(self, pos, seen):
+        if pos in seen:
+            return 0
+        
+        ri, ci = pos
+        if ri < 0 or ri == self.rows or ci < 0 or ci == self.cols:
+            return 0
+        
+        if self.grid[ri][ci] == 0:
+            return 0
+        
+        seen.add(pos)
+        
+        streak = 0
+        streak += self.exploreLargest((ri - 1, ci), seen)
+        streak += self.exploreLargest((ri + 1, ci), seen)
+        streak += self.exploreLargest((ri, ci - 1), seen)
+        streak += self.exploreLargest((ri, ci + 1), seen)
+        
+        return streak + 1
+        
+        
+arr = [
+    [[1,0],[0,1]],
+    [[1,1],[1,0]],
+    [[1,1],[1,1]],
+    [
+        [1,0,1],
+        [0,0,0],
+        [0,1,1]
+    ],
+    [
+        [0,1,0],
+        [1,0,1],
+        [1,0,0]
+    ]
+]
+foo = arr[-1]
+sol = Solution()
+res = sol.largestIsland(foo)
+print(res)
