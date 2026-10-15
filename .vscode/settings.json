@@ -1,11 +1,11 @@
 {
-  "workbench.colorTheme": "JellyFish",
+  "workbench.colorTheme": "Solarized High Contrast Light",
   "editor.tokenColorCustomizations": {
         "textMateRules": [
             {
                 "scope": "entity.other.inherited-class.sl", // for backticks
                 "settings": {
-                    "foreground": "#F1C066",
+                    "foreground": "#a468e8",
                 }
             }
         ]
