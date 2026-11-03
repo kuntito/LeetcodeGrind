@@ -1,0 +1,15 @@
+aa => 1
+aa => 1
+# aab => 1
+# bcb => 1
+# baa => 1
+# aabc => 1
+# abcb => 1
+# bcba => 1
+# cbaa => 1
+# aabcb => 1
+# abcba => 1
+# bcbaa => 1
+aabcba => 2
+# abcbaa => 2
+# aabcbaa => 3
