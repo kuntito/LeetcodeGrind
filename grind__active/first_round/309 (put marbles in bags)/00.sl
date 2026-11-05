@@ -28,25 +28,51 @@ right, the example kinda clarifies it.
 # START HERE...
 i have bags, i have marbles.
 
-i want to divide marbles into the bags.
-and there's different ways i can do this.
+i want to put the marbles in the bags.
 
-each way, has a property, called score.
+the marbles are lined up
+and i must pick one
+before the next.
 
-of the different ways, i can divide marbles.
-what's the difference between the highest score
-and the lowest score?
+and one bag must be sealed before the next.
 
-that's the question.
-okay, i mean, i could write the brute force
-well, i think it's a good place to start.
-i can devote the 45 mins to it.
+there's different ways i split the marbles in bags.
 
-and crack it once and for all.
-okay.
+as long as all the bags are used
+and all the marbles are placed.
 
-************
-i got the gist, but it takes way too long.
+i've done my job.
 
-well, how do you make it faster.
-it's probably easier to watch a solution.
+of all the ways i could do this.
+
+i care about two.
+the one with the highest score.
+and the one with the lowest score.
+
+yes, score.
+score is a number
+calculated after distributing the marbles
+into the bags.
+
+so, what is this score?
+well, for each bag
+you find a cost.
+
+the score is the sum of said costs.
+so, what is a cost?
+
+well, a number.
+
+you get it by adding the weights of the first marble put in the bag
+and that of the last marble put in the bag.
+
+sometimes, it's the same marble.
+you add nonetheless.
+
+my first attempt, i explored every possiblity
+tracking the highest score and lowest score.
+
+but it was inefficient, `Time Limit Exceeded`
+
+now, how do i make it efficient?
+i'd watch a video.

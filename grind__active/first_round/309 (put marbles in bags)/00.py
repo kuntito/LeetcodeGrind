@@ -48,7 +48,7 @@ class Solution:
         self.maxScore = float("-inf")
         
         distribution = []        
-        self.explore(
+        self.fillBag(
             bagsLeft,
             curIdx,
             distribution,
@@ -67,7 +67,7 @@ class Solution:
             self.maxScore = score
             
     
-    def explore(
+    def fillBag(
         self,
         bagsLeft,
         curIdx,
@@ -105,7 +105,7 @@ class Solution:
                 firstInBag + lastInBag
             )
             
-            self.explore(
+            self.fillBag(
                 bagsLeft - 1,
                 idx + 1,
                 distribution
