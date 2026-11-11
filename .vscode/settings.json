@@ -1,11 +1,11 @@
 {
-  "workbench.colorTheme": "True Black",
+  "workbench.colorTheme": "Default Dark+",
   "editor.tokenColorCustomizations": {
         "textMateRules": [
             {
                 "scope": "entity.other.inherited-class.sl", // for backticks
                 "settings": {
-                    "foreground": "#a468e8",
+                    "foreground": "#e8c868",
                 }
             }
         ]
