@@ -1,6 +1,5 @@
 class Solution:
     def minCut(self, s: str) -> int:
-        pass
         # at each point,
         # you do two things.
         
