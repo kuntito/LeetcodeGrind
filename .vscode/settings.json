@@ -5,7 +5,7 @@
             {
                 "scope": "entity.other.inherited-class.sl", // for backticks
                 "settings": {
-                    "foreground": "#e8c868",
+                    "foreground": "#372ac7",
                 }
             }
         ]
